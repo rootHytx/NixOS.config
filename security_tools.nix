@@ -26,8 +26,8 @@
 		ntp openssh openvpn samba step-cli
 		tightvnc wireguard-go wireguard-tools xrdp
 		#MALWARE/PWN
-		gdb ghidra-bin pwndbg 
-		pwntools radare2 yara
+		gdb ghidra-bin pwndbg clang clang-tools
+		pwntools radare2 yara valgrind
 		#MOBILE
 		androguard apktool 
 		dex2jar scrcpy
@@ -49,8 +49,14 @@
 		tcpdump wireshark
 		#WIRELESS
 		aircrack-ng
+		(pkgs.discord.override {
+		  # remove any overrides that you don't want
+		  withOpenASAR = true;
+		  withVencord = true;
+		})
 	];
 	nixpkgs.config.permittedInsecurePackages = [
 		"tightvnc-1.3.10"
+		"openssl-1.1.1w"
 	];
 }
