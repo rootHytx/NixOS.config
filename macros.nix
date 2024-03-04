@@ -10,6 +10,6 @@
 		alias spot='spotify --enable-features=UseOzonePlatform --ozone-platform=wayland'
 		alias showpaths='cd /home/hytx/Desktop && python showpaths.py'
 		alias sort='cd /home/hytx/Desktop/ && python sort.py'
-		alias push='cd ~ && bash push.sh && cd -'
+		alias push='bash /home/hytx/push.sh'
 	'';
 }
