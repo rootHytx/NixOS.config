@@ -1,6 +1,6 @@
 {pkgs, ...}:
 {
-	environment.systemPackages = with pkgs; [
+	users.users.hytx.packages = with pkgs; [
 		#DNS
 		aiodnsbrute amass bind dnsenum
 		dnsmon-go dnsmonster dnsrecon dnstake

@@ -40,7 +40,7 @@ button {
     /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
     /* Avoid rounded borders under each button name */
-    border: 0;
+    border: 1px;
     border-radius: 0;
 }
 
@@ -49,11 +49,13 @@ button:hover {
     color: #ffffff
 }
 
-
 #workspaces button {
-    padding: 0 1px;
-    background-color: transparent;
+    padding: 0 2px;
     color: #000000;
+}
+
+#workspaces button label{
+    font-size: 15px;
 }
 
 #workspaces button:hover {
@@ -93,24 +95,27 @@ button:hover {
     padding: 0 10px;
     color: #ffffff;
 }
-
 #window{
     background-color: transparent;
     color: #ffffff;
     padding: 0px;
-    font-size: 11px;
+    font-size: 12px;
+}
+
+#image{
+    margin-left: 8px;
 }
 #workspaces {
     background-color: rgba(191, 107, 214, 0.7);
     border: 0px solid rgb(191, 107, 214);
     border-radius: 20px;
-    padding: 2px;
-    margin: 5px 0px 5px 0px;
+    padding: 3px;
+    margin: 5px 0px 5px 5px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 /* If workspaces is the rightmost module, omit right margin */
