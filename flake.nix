@@ -9,6 +9,7 @@
          # to avoid problems caused by different versions of nixpkgs.
          inputs.nixpkgs.follows = "nixpkgs";
        };
+    hyprlock.url = "github:hyprwm/hyprlock/main";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {

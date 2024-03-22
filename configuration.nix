@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   boot.loader.systemd-boot.enable = true;
@@ -17,8 +17,9 @@
   hardware.pulseaudio.enable = false;
   powerManagement.powertop.enable = true;
   services.getty.autologinUser = "hytx";
-  
-
+  programs.thunar.enable = true;
+  programs.xfconf.enable = true;
+  services.tumbler.enable = true; # Thumbnail support for images
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Lisbon";
@@ -77,24 +78,28 @@
   };
 
   environment.systemPackages = with pkgs; [
-        alacritty git glib go jdk jre pipewire
+        git alacritty glib go jdk jre pipewire
         libclang libgcc ntfs3g python3 btop
         catppuccin-gtk wireplumber home-manager
+        gparted
   ];
+  environment.etc = with pkgs; {
+    "jdk".source = jdk;
+    "jdk8".source = jdk8;
+  };
 
   users.users = {
     hytx = {
       isNormalUser = true;
       extraGroups = [ "networkmanager" "wheel" "docker" "vbox" ];
       packages = with pkgs; [
-        betterdiscordctl blueman bluez brightnessctl
-        discord fastfetch feh firefox gnome.nautilus
-        grim hyprlock hyprpaper jetbrains.rust-rover
-        networkmanagerapplet pavucontrol
-        qt6.full rofi-wayland rustup slurp spotify
-        sublime4 thunderbird waybar wl-clipboard
+        betterdiscordctl blueman bluez brightnessctl chromium discord
+        docker fastfetch feh firefox grim inputs.hyprlock.packages."${pkgs.system}".hyprlock 
+        hyprpaper jetbrains.rust-rover
+        networkmanagerapplet openvpn pavucontrol qt6.full rofi-wayland
+        rustup slurp spotify sublime4 thunderbird waybar wl-clipboard
         xdg-desktop-portal-hyprland xournalpp xwaylandvideobridge
-        chromium docker openvpn
+        stremio loupe vlc gimp
       ];
     };
   };
@@ -102,15 +107,27 @@
 
 
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
   users.extraGroups.vboxusers.members = [ "vbox" ];
   
+  system.autoUpgrade = {
+      enable = true;
+      flake = inputs.self.outPath;
+      flags = [
+        "--update-input"
+        "nixpkgs"
+        "--no-write-lock-file"
+        "-L" # print build logs
+      ];
+      dates = "02:00";
+      randomizedDelaySec = "45min";
+    };
 
   programs.hyprland.enable=true;
   boot.supportedFilesystems = [ "ntfs" ];
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "23.11"; # Did you read the comment?
-  system.autoUpgrade.enable  = true;
   system.autoUpgrade.allowReboot  = false;
 
 }
