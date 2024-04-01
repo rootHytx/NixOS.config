@@ -1,0 +1,10 @@
+alias:new config subl /etc/nixos/configuration.nix
+alias:new macros subl /etc/nixos/macros.nix
+alias:new tools subl /etc/nixos/security_tools.nix
+alias:new bashrc subl /etc/nixos/shell_options.nix
+alias:new rebuild sudo nixos-rebuild switch
+alias:new disc discord --enable-features=UseOzonePlatform --ozone-platform=wayland
+alias:new spot spotify --enable-features=UseOzonePlatform --ozone-platform=wayland
+alias:new push elvish /home/hytx/push.elv
+alias:new rustrover nix-shell /etc/nixos/rustshell.nix --command 'rust-rover &'
+alias:new journal xournalpp &

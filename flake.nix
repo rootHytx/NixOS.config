@@ -20,10 +20,7 @@
         ./configuration.nix
         ./hardware-configuration.nix
         ./security_tools.nix
-        ./wrapper.nix
         ./fonts.nix
-        ./paths.nix
-        ./macros.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;

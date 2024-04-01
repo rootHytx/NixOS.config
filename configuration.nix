@@ -7,21 +7,37 @@
   boot.loader.grub.useOSProber = true;
   
   services.blueman.enable = true;
-  networking.hostName = "nixos"; # Define your hostname.  
-  fonts.fontconfig.enable = true;
-  services.xserver.enable = false;
+  services.xserver.enable = true;
+  services.xserver.displayManager.autoLogin.user = "hytx";
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = false;
+  #services.getty.autologinUser = "hytx";
+  services.xserver.wacom.enable = true;
+  services.tumbler.enable = true; # Thumbnail support for images
+   services.logind.extraConfig = ''
+    # don’t shutdown when power button is short-pressed
+    HandlePowerKey=suspend
+    HandleLidSwitch=suspend
+  '';
+  services.udev.enable=true;
+  services.udev.extraHwdb = ''
+    sensor:modalias:acpi:INVN6500*:dmi:*svn*ASUSTeK*:*pn*TP300LA*
+     ACCEL_MOUNT_MATRIX=0, 1, 0; 1, 0, 0; 0, 0, 1
+  '';
+  networking.hostName = "nixos"; # Define your hostname.  
+  networking.networkmanager.enable = true;
+  fonts.fontconfig.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; 
   hardware.pulseaudio.enable = false;
+  hardware.sensor.iio.enable = true;
   powerManagement.powertop.enable = true;
-  services.getty.autologinUser = "hytx";
   programs.thunar.enable = true;
   programs.xfconf.enable = true;
-  services.tumbler.enable = true; # Thumbnail support for images
-  networking.networkmanager.enable = true;
-
+  programs.hyprland = {
+    enable=true;
+    xwayland.enable = true; 
+  };
   time.timeZone = "Europe/Lisbon";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -39,6 +55,11 @@
   };
 
   services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
   sound.enable = true;
   security.rtkit.enable = true;
@@ -81,16 +102,32 @@
         git alacritty glib go jdk jre pipewire
         libclang libgcc ntfs3g python3 btop
         catppuccin-gtk wireplumber home-manager
-        gparted
+        gparted iio-sensor-proxy libinput elvish 
   ];
   environment.etc = with pkgs; {
     "jdk".source = jdk;
     "jdk8".source = jdk8;
   };
 
+  environment.sessionVariables = {
+    XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_CURRENT_DESKTOP="Hyprland";
+    XDG_SESSION_TYPE="wayland";
+    XDG_SESSION_DESKTOP="Hyprland";
+    XDG_RUNTIME_DIR="/tmp/users/$(id -u)";
+    QT_AUTO_SCREEN_SCALE_FACTOR="1";
+    QT_QPA_PLATFORM="wayland;xcb";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION="1";
+    SDL_VIDEODRIVER="wayland";
+    _JAVA_AWT_WM_NONEREPARENTING="1";
+    CLUTTER_BACKEND="wayland";
+    _JAVA_AWT_WM_NONREPARENTING="1";
+  };
+
   users.users = {
     hytx = {
       isNormalUser = true;
+      shell=pkgs.elvish;
       extraGroups = [ "networkmanager" "wheel" "docker" "vbox" ];
       packages = with pkgs; [
         betterdiscordctl blueman bluez brightnessctl chromium discord
@@ -99,7 +136,7 @@
         networkmanagerapplet openvpn pavucontrol qt6.full rofi-wayland
         rustup slurp spotify sublime4 thunderbird waybar wl-clipboard
         xdg-desktop-portal-hyprland xournalpp xwaylandvideobridge
-        stremio loupe vlc gimp
+        stremio loupe vlc gimp  wvkbd
       ];
     };
   };
@@ -123,7 +160,6 @@
       randomizedDelaySec = "45min";
     };
 
-  programs.hyprland.enable=true;
   boot.supportedFilesystems = [ "ntfs" ];
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

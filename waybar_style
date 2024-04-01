@@ -9,7 +9,7 @@ window#waybar {
     border: 2px solid rgba(191, 107, 214, 0.7);
     border-radius: 20px;
     color: #ffffff;
-    padding: 50px;
+    padding: 10px;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -50,12 +50,12 @@ button:hover {
 }
 
 #workspaces button {
-    padding: 0 2px;
+    padding: 3px 1px 0px 1px ;
     color: #000000;
 }
 
 #workspaces button label{
-    font-size: 15px;
+    font-size: 13px;
 }
 
 #workspaces button:hover {
@@ -109,7 +109,7 @@ button:hover {
     background-color: rgba(191, 107, 214, 0.7);
     border: 0px solid rgb(191, 107, 214);
     border-radius: 20px;
-    padding: 3px;
+    padding: 2px;
     margin: 5px 0px 5px 5px;
 }
 
