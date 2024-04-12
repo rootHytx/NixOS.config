@@ -7,11 +7,11 @@
   boot.loader.grub.useOSProber = true;
   
   services.blueman.enable = true;
-  services.xserver.enable = true;
-  services.xserver.displayManager.autoLogin.user = "hytx";
+  services.xserver.enable = false;
+  #services.xserver.displayManager.autoLogin.user = "hytx";
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = false;
-  #services.getty.autologinUser = "hytx";
+  services.getty.autologinUser = "hytx";
   services.xserver.wacom.enable = true;
   services.tumbler.enable = true; # Thumbnail support for images
    services.logind.extraConfig = ''
@@ -35,8 +35,13 @@
   programs.thunar.enable = true;
   programs.xfconf.enable = true;
   programs.hyprland = {
-    enable=true;
+    enable = true;
     xwayland.enable = true; 
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  };
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
   time.timeZone = "Europe/Lisbon";
 
@@ -103,6 +108,7 @@
         libclang libgcc ntfs3g python3 btop
         catppuccin-gtk wireplumber home-manager
         gparted iio-sensor-proxy libinput elvish 
+        neovim
   ];
   environment.etc = with pkgs; {
     "jdk".source = jdk;
@@ -132,11 +138,11 @@
       packages = with pkgs; [
         betterdiscordctl blueman bluez brightnessctl chromium discord
         docker fastfetch feh firefox grim inputs.hyprlock.packages."${pkgs.system}".hyprlock 
-        hyprpaper jetbrains.rust-rover
-        networkmanagerapplet openvpn pavucontrol qt6.full rofi-wayland
+        hyprpaper networkmanagerapplet openvpn pavucontrol qt6.full rofi-wayland
         rustup slurp spotify sublime4 thunderbird waybar wl-clipboard
         xdg-desktop-portal-hyprland xournalpp xwaylandvideobridge
-        stremio loupe vlc gimp  wvkbd
+        stremio loupe vlc gimp  wvkbd nwg-look runescape jetbrains-toolbox
+        libreoffice-qt
       ];
     };
   };
@@ -159,6 +165,7 @@
       dates = "02:00";
       randomizedDelaySec = "45min";
     };
+  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w"];
 
   boot.supportedFilesystems = [ "ntfs" ];
   nixpkgs.config.allowUnfree = true;

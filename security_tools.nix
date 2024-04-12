@@ -1,6 +1,6 @@
-{pkgs, ...}:
-{
-	users.users.hytx.packages = with pkgs; [
+{ pkgs ? import <nixpkgs> {} }:
+	pkgs.mkShell rec {
+    buildInputs = with pkgs; [
 		#DNS
 		aiodnsbrute amass bind dnsenum
 		dnsmon-go dnsmonster dnsrecon dnstake
@@ -49,14 +49,8 @@
 		tcpdump wireshark
 		#WIRELESS
 		aircrack-ng
-		(pkgs.discord.override {
-		  # remove any overrides that you don't want
-		  withOpenASAR = true;
-		  withVencord = true;
-		})
 	];
 	nixpkgs.config.permittedInsecurePackages = [
 		"tightvnc-1.3.10"
-		"openssl-1.1.1w"
 	];
 }

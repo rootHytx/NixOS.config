@@ -11,5 +11,7 @@
     dina-font
     proggyfonts
     roboto
+    font-awesome
+    (nerdfonts.override { fonts = [ "Hack" ]; })
   ];
 }
