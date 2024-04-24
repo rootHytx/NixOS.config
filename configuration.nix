@@ -38,7 +38,7 @@
     enable = true;
     xwayland.enable = true; 
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  };
+  }; 
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
@@ -81,14 +81,15 @@
   };
 
   programs.nm-applet.enable = true;
-
+  
+  services.power-profiles-daemon.enable = false;
   services.tlp = {
         enable = true;
         settings = {
-          CPU_SCALING_GOVERNOR_ON_AC = "performance";
-          CPU_SCALING_GOVERNOR_ON_BAT = "power";
+          #CPU_SCALING_GOVERNOR_ON_AC = "performance";
+          #CPU_SCALING_GOVERNOR_ON_BAT = "power";
 
-          CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+          CPU_ENERGY_PERF_POLICY_ON_BAT = "powersave";
           CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
           CPU_MIN_PERF_ON_AC = 0;
@@ -108,7 +109,7 @@
         libclang libgcc ntfs3g python3 btop
         catppuccin-gtk wireplumber home-manager
         gparted iio-sensor-proxy libinput elvish 
-        neovim
+        neovim dunst
   ];
   environment.etc = with pkgs; {
     "jdk".source = jdk;
@@ -130,6 +131,11 @@
     _JAVA_AWT_WM_NONREPARENTING="1";
   };
 
+  swapDevices = [{
+    device = "/swapfile";
+    size = 16 * 1024; # 16GB
+  }];
+
   users.users = {
     hytx = {
       isNormalUser = true;
@@ -142,7 +148,7 @@
         rustup slurp spotify sublime4 thunderbird waybar wl-clipboard
         xdg-desktop-portal-hyprland xournalpp xwaylandvideobridge
         stremio loupe vlc gimp  wvkbd nwg-look runescape jetbrains-toolbox
-        libreoffice-qt
+        libreoffice-qt lua-language-server font-awesome protobuf_25
       ];
     };
   };

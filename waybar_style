@@ -1,6 +1,6 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, 'Hack Nerd Font';
+    font-family: Font-Awesome, 'Source Code Pro';
     font-weight: 400;
     font-size: 14px;
 }
@@ -70,6 +70,7 @@ button:hover {
 
 #workspaces button.urgent {
     background-color: #eb4d4b;
+    border-radius: 20px;
 }
 
 #mode {
@@ -135,7 +136,7 @@ window{
     margin: 5px 0px 5px 0px;
 }
 
-#tray{
+#clock{
     margin-right: 5px;
 }
 
@@ -177,9 +178,9 @@ label:focus {
 }
 
 #pulseaudio.muted {
-    background-color: rgba(191, 107, 214, 0.7);
+    background-color: rgba(191, 107, 214, 1);
     border-radius: 20px;
-    color: #2a5c45;
+    color: #000000;
 }
 
 #wireplumber.muted {

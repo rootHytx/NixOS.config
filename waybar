@@ -3,7 +3,7 @@
     "spacing": 6, // Gaps between modules (4px)
     "modules-left": [ "image#nix", "hyprland/workspaces", "hyprland/window"],
     "modules-center": [],
-    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "backlight", "battery", "clock", "tray"],
+    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", "backlight", "battery", "tray", "clock"],
     "image#nix":{
         "path":"/home/hytx/Pictures/Nix.png",
         "size": 35
@@ -87,8 +87,8 @@
     "pulseaudio": {
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth-muted": "󰖁 {icon} {format_source}",
+        "format-muted": "󰖁 {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {

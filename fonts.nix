@@ -12,6 +12,7 @@
     proggyfonts
     roboto
     font-awesome
+    source-code-pro
     (nerdfonts.override { fonts = [ "Hack" ]; })
   ];
 }
