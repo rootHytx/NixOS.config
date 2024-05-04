@@ -21,6 +21,7 @@
         ./configuration.nix
         ./hardware-configuration.nix
         ./fonts.nix
+        ./zsh_config.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;

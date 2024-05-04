@@ -53,4 +53,7 @@
 	nixpkgs.config.permittedInsecurePackages = [
 		"tightvnc-1.3.10"
 	];
+  shellHook = ''
+    export NIXPKGS_ALLOW_UNFREE=1;
+  '';
 }

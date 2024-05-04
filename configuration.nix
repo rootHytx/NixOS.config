@@ -38,7 +38,8 @@
     enable = true;
     xwayland.enable = true; 
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  }; 
+  };
+  programs.zsh.enable=true;
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
@@ -92,14 +93,9 @@
           CPU_ENERGY_PERF_POLICY_ON_BAT = "powersave";
           CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
-          CPU_MIN_PERF_ON_AC = 0;
-          CPU_MAX_PERF_ON_AC = 100;
-          CPU_MIN_PERF_ON_BAT = 0;
-          CPU_MAX_PERF_ON_BAT = 85;
-
          #Optional helps save long term battery health
-         START_CHARGE_THRESH_BAT = 40; # 40 and bellow it starts to charge
-         STOP_CHARGE_THRESH_BAT = 80; # 80 and above it stops charging
+         #START_CHARGE_THRESH_BAT0=40; # 40 and bellow it starts to charge
+         STOP_CHARGE_THRESH_BAT0=1; # 80 and above it stops charging
 
         };
   };
@@ -139,16 +135,17 @@
   users.users = {
     hytx = {
       isNormalUser = true;
-      shell=pkgs.elvish;
+      shell=pkgs.zsh;
       extraGroups = [ "networkmanager" "wheel" "docker" "vbox" ];
       packages = with pkgs; [
-        betterdiscordctl blueman bluez brightnessctl chromium discord
-        docker fastfetch feh firefox grim inputs.hyprlock.packages."${pkgs.system}".hyprlock 
+        blueman bluez brightnessctl chromium docker 
+        fastfetch feh firefox grim betterdiscordctl discord
+        inputs.hyprlock.packages."${pkgs.system}".hyprlock 
         hyprpaper networkmanagerapplet openvpn pavucontrol qt6.full rofi-wayland
         rustup slurp spotify sublime4 thunderbird waybar wl-clipboard
         xdg-desktop-portal-hyprland xournalpp xwaylandvideobridge
-        stremio loupe vlc gimp  wvkbd nwg-look runescape jetbrains-toolbox
-        libreoffice-qt lua-language-server font-awesome protobuf_25
+        stremio loupe vlc gimp  wvkbd nwg-look jetbrains-toolbox
+        libreoffice-qt lua-language-server font-awesome protobuf_25 thefuck
       ];
     };
   };
