@@ -37,7 +37,7 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true; 
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
   programs.zsh.enable=true;
   nix.settings = {
@@ -101,11 +101,27 @@
   };
 
   environment.systemPackages = with pkgs; [
-        git alacritty glib go jdk jre pipewire
-        libclang libgcc ntfs3g python3 btop
-        catppuccin-gtk wireplumber home-manager
-        gparted iio-sensor-proxy libinput elvish 
-        neovim dunst
+        alacritty
+        btop
+        catppuccin-gtk
+        dunst
+        elvish
+        git
+        glib
+        go
+        gparted
+        home-manager
+        iio-sensor-proxy
+        jdk
+        jre
+        libclang
+        libgcc
+        libinput
+        neovim
+        ntfs3g
+        pipewire
+        python3
+        wireplumber
   ];
   environment.etc = with pkgs; {
     "jdk".source = jdk;
@@ -138,14 +154,49 @@
       shell=pkgs.zsh;
       extraGroups = [ "networkmanager" "wheel" "docker" "vbox" ];
       packages = with pkgs; [
-        blueman bluez brightnessctl chromium docker 
-        fastfetch feh firefox grim betterdiscordctl discord
-        inputs.hyprlock.packages."${pkgs.system}".hyprlock 
-        hyprpaper networkmanagerapplet openvpn pavucontrol qt6.full rofi-wayland
-        rustup slurp spotify sublime4 thunderbird waybar wl-clipboard
-        xdg-desktop-portal-hyprland xournalpp xwaylandvideobridge
-        stremio loupe vlc gimp  wvkbd nwg-look jetbrains-toolbox
-        libreoffice-qt lua-language-server font-awesome protobuf_25 thefuck
+        betterdiscordctl
+        blueman
+        bluez
+        brightnessctl
+        chromium
+        discord
+        docker
+        fastfetch
+        feh
+        firefox
+        font-awesome
+        gimp
+        grim
+        inputs.hyprpaper.packages."${pkgs.system}".hyprpaper
+        inputs.hyprlock.packages."${pkgs.system}".hyprlock
+        jetbrains-toolbox
+        libreoffice-qt
+        libreswan
+        loupe
+        networkmanagerapplet
+        nwg-look
+        nodejs_22
+        openvpn
+        pavucontrol
+        playerctl
+        protobuf_25
+        qt6.full
+        rofi-wayland
+        rustup
+        slurp
+        spotify
+        stremio
+        sublime4
+        thefuck
+        thunderbird
+        unzip
+        vlc
+        waybar
+        wl-clipboard
+        wvkbd
+        xdg-desktop-portal-hyprland
+        xournalpp
+        xwaylandvideobridge
       ];
     };
   };
@@ -169,6 +220,9 @@
       randomizedDelaySec = "45min";
     };
   nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w"];
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+             "padre-2.1.0"
+           ];
 
   boot.supportedFilesystems = [ "ntfs" ];
   nixpkgs.config.allowUnfree = true;

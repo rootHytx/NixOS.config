@@ -12,7 +12,7 @@
     shellHook = ''
       export PATH=$PATH:''${CARGO_HOME:-~/.cargo}/bin
       export PATH=$PATH:''${RUSTUP_HOME:-~/.rustup}/toolchains/$RUSTC_VERSION-x86_64-unknown-linux-gnu/bin/
-      export PROTOBUF_LOCATION=/nix/store/$(ls -1 /nix/store | grep protobuf-25.3 | head -n1)
+      export PROTOBUF_LOCATION=/nix/store/$(ls -1 /nix/store | grep protobuf-25.3 | tail -n1)
       export PROTOC=$PROTOBUF_LOCATION/bin/protoc
       export PROTOC_INCLUDE=$PROTOBUF_LOCATION/include
       '';
