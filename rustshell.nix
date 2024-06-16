@@ -1,3 +1,8 @@
+with import <nixpkgs> {
+  crossSystem = {
+    config = "arm-unknown-linux-gnu";
+  };
+};
 { pkgs ? import <nixpkgs> {} }:
   pkgs.mkShell rec {
     buildInputs = with pkgs; [
@@ -5,6 +10,8 @@
       # Replace llvmPackages with llvmPackages_X, where X is the latest LLVM version (at the time of writing, 16)
       llvmPackages_17.bintools
       rustup
+      pkg-config
+      libudev-zero
     ];
     RUSTC_VERSION = pkgs.lib.readFile ./rust-toolchain;
     # https://github.com/rust-lang/rust-bindgen#environment-variables

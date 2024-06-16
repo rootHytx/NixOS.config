@@ -6,7 +6,7 @@ in pkgs.mkShell {
       python-pkgs.pandas
       python-pkgs.requests
       python-pkgs.matplotlib
-      python-pkgs.hashlib
+      python-pkgs.pwntools
     ]))
   ];
 }

@@ -26,6 +26,10 @@
   '';
   networking.hostName = "nixos"; # Define your hostname.  
   networking.networkmanager.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 8080 ];
+  };
   fonts.fontconfig.enable = true;
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; 
@@ -64,7 +68,7 @@
   services.avahi = {
     enable = true;
     nssmdns4 = true;
-    openFirewall = true;
+    openFirewall = false;
   };
 
   sound.enable = true;
@@ -121,6 +125,8 @@
         ntfs3g
         pipewire
         python3
+        qemu
+        quickemu
         wireplumber
   ];
   environment.etc = with pkgs; {
@@ -167,7 +173,8 @@
         font-awesome
         gimp
         grim
-        inputs.hyprpaper.packages."${pkgs.system}".hyprpaper
+        #inputs.hyprpaper.packages."${pkgs.system}".hyprpaper
+        hyprpaper
         inputs.hyprlock.packages."${pkgs.system}".hyprlock
         jetbrains-toolbox
         libreoffice-qt
@@ -203,9 +210,6 @@
   virtualisation.docker.enable = true;
 
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  users.extraGroups.vboxusers.members = [ "vbox" ];
   
   system.autoUpgrade = {
       enable = true;
