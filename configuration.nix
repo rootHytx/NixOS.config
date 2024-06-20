@@ -1,6 +1,16 @@
 { config, pkgs, lib, inputs, ... }:
 
 {  
+  imports = [
+    ./boot.nix
+    ./environment.nix
+    ./hardware.nix
+    ./i18n.nix
+    ./networking.nix
+    ./programs.nix
+    ./services.nix
+    ./users.nix
+  ];
   fonts.fontconfig.enable = true;
   powerManagement.powertop.enable = true;
   nix.settings = {

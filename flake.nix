@@ -24,17 +24,9 @@
       inherit system;
       specialArgs = { inherit inputs; inherit default; };
       modules = [
-        ./boot.nix
         ./configuration.nix
-        ./environment.nix
         ./fonts.nix
-        ./hardware.nix
         ./hardware-configuration.nix
-        ./i18n.nix
-        ./networking.nix
-        ./programs.nix
-        ./services.nix
-        ./users.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;

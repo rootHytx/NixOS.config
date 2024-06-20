@@ -1,7 +1,7 @@
 {config, pkgs, lib, inputs, ...}:
 
 {
-   programs = {
+  programs = {
     thunar.enable = true;
     xfconf.enable = true;
     hyprland = {
