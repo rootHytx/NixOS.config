@@ -1,16 +1,18 @@
 { config, pkgs, lib, inputs, ... }:
 
-{  
+{
   imports = [
     ./boot.nix
-    ./environment.nix
-    ./hardware.nix
     ./i18n.nix
-    ./networking.nix
+    ./users.nix
+    ./hardware.nix
     ./programs.nix
     ./services.nix
-    ./users.nix
+    ./networking.nix
+    ./environment.nix
   ];
+  
+   
   fonts.fontconfig.enable = true;
   powerManagement.powertop.enable = true;
   nix.settings = {
@@ -19,7 +21,8 @@
   };
   time.timeZone = "Europe/Lisbon";
   security.rtkit.enable = true;
-  sound.enable = true;
+  #sound.enable = true;
+  nixpkgs.config.pulseaudio = true;
   swapDevices = [{
     device = "/swapfile";
     size = 16 * 1024; # 16GB

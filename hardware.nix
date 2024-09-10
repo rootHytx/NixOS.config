@@ -4,9 +4,14 @@
   hardware = {
     bluetooth = {
       enable = true;
-      powerOnBoot = true; 
+      powerOnBoot = true;
     };
-    pulseaudio.enable = false;
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+    };
+    graphics.enable = true;
+    enableAllFirmware  = true;
     sensor.iio.enable = true;
   };
 }

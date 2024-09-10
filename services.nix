@@ -1,7 +1,7 @@
 {config, pkgs, lib, inputs, ...}:
 
 {
-  services = {
+ services = {
     blueman.enable = true;
     xserver = {
       enable = true;
@@ -35,11 +35,13 @@
     gvfs.enable = true;
     udisks2.enable = true;
     pipewire = {
-      enable = true;
+      enable = false;
+      audio.enable = true;
+      jack.enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      wireplumber.enable=true;
+      wireplumber.enable=false;
     };
     power-profiles-daemon.enable = false;
     tlp = {
@@ -56,6 +58,11 @@
     zerotierone = {
       enable = true;
       joinNetworks = [ "73a15e146065937a" ];
+      localConf = { 
+        settings = { 
+          softwareUpdate = "disable";
+        };
+      };
     };
   };
 }

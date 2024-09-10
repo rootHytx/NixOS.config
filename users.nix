@@ -1,12 +1,14 @@
 {config, pkgs, lib, inputs, ...}:
 
-{
+{  
   users.users = {
     hytx = {
       isNormalUser = true;
       shell=pkgs.zsh;
-      extraGroups = [ "networkmanager" "wheel" "docker" "vbox" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" "audio" ];
       packages = with pkgs; [
+        catppuccin-gtk
+        colloid-icon-theme
         betterdiscordctl
         blueman
         bluez
@@ -16,19 +18,22 @@
         docker
         fastfetch
         feh
-        firefox
+        file
         font-awesome
         gimp
+        ghidra
         grim
-        #inputs.hyprpaper.packages."${pkgs.system}".hyprpaper
-        hyprpaper
+        inputs.hyprpaper.packages."${pkgs.system}".hyprpaper
+        #hyprpaper
         inputs.hyprlock.packages."${pkgs.system}".hyprlock
         jetbrains-toolbox
         libreoffice-qt
         libreswan
         loupe
+        lsof
         networkmanagerapplet
         nwg-look
+        nmap
         nodejs_22
         openvpn
         pavucontrol

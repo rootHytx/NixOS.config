@@ -5,7 +5,6 @@
     systemPackages = with pkgs; [
       alacritty
       btop
-      catppuccin-gtk
       dunst
       elvish
       git

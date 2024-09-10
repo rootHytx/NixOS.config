@@ -1,7 +1,7 @@
 {config, pkgs, lib, inputs, ...}:
 
 {
-  i18n = {
+ i18n = {
     defaultLocale = "en_US.UTF-8";
     extraLocaleSettings = {
       LC_ADDRESS = "pt_PT.UTF-8";

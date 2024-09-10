@@ -1,7 +1,7 @@
 {config, pkgs, lib, inputs, ...}:
 
-{  
-boot = {
+{
+  boot = {
     loader = {
       systemd-boot.enable = true;
       grub = {
@@ -11,6 +11,6 @@ boot = {
       };
     };
     supportedFilesystems = [ "ntfs" ];
-    kernelParams = [ "snd-intel-dspcfg.dsp_driver=1" ];
+    #kernelParams = [ "snd-intel-dspcfg.dsp_driver=1" ];
   };
 }

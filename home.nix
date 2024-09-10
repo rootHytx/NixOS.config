@@ -1,34 +1,71 @@
 {config, pkgs, default, ...}:
 {
+  nixpkgs.overlays = [
+    (final: prev: {
+      catppuccin-gtk = prev.catppuccin-gtk.overrideAttrs (old: {
+        src = prev.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "gtk";
+          rev = "v${old.version}";
+          fetchSubmodules = true;
+          hash = "sha256-q5/VcFsm3vNEw55zq/vcM11eo456SYE5TQA3g2VQjGc=";
+        };
+        postUnpack = "";
+      });
+    })
+  ];
   home.username = "hytx";
   home.homeDirectory = "/home/hytx";
   gtk = {
     enable = true;
+    #theme = {
+    #  name = "catppuccin-macchiato-pink-compact+default";
+    #  package = pkgs.catppuccin-gtk.override {
+    #    accents = [ "pink" ];
+    #    size = "compact";
+    #    #tweaks = "default+black+rimless";
+    #    variant = "macchiato";
+    #  };
+    #};
     theme = {
-      name = "Catppuccin-Macchiato-Compact-Pink-Dark";
-      package = default.catppuccin-gtk.override {
-        accents = [ "pink" ];
-        size = "compact";
-        tweaks = [ "rimless" "black" ];
-        variant = "macchiato";
+      name = "Colloid-Pink-Dark-Compact";
+      package = default.colloid-gtk-theme.override{
+        themeVariants = ["pink"];
+        colorVariants = ["dark"];
+        sizeVariants = ["compact"];
+        tweaks = ["rimless"];
       };
     };
     iconTheme = {
-      name = "colloid-icon-theme";
-      package = default.colloid-icon-theme;
+      name = "Colloid-pink-dark";
+      package = default.colloid-icon-theme.override{
+        schemeVariants = ["default"];
+        colorVariants = ["pink"];
+      };
     };
     gtk3.extraConfig = {
       Settings = ''
         gtk-application-prefer-dark-theme=1
       '';
     };
-
+  
     gtk4.extraConfig = {
       Settings = ''
         gtk-application-prefer-dark-theme=1
       '';
     };
   };
+  #dconf.settings = {
+  #  "org/gtk/settings/file-chooser" = {
+  #    sort-directories-first = true;
+  #  };
+  
+  #  # GTK4 Setup
+  #  "org/gnome/desktop/interface" = {
+  #    gtk-theme = "Catppuccin-Macchiato-Compact-Pink-Dark";
+  #    color-scheme = "prefer-dark";
+  #  };
+  #};
   home.pointerCursor = {
     gtk.enable = true;
     x11.enable = true;
