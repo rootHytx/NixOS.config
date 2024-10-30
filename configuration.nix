@@ -1,57 +1,53 @@
-{ config, pkgs, lib, inputs, ... }:
+{ ... }:
 
 {
-  imports = [
-    ./boot.nix
-    ./i18n.nix
-    ./users.nix
-    ./hardware.nix
-    ./programs.nix
-    ./services.nix
-    ./networking.nix
-    ./environment.nix
-  ];
-  
-   
-  fonts.fontconfig.enable = true;
-  powerManagement.powertop.enable = true;
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
+  imports =
+    [   ./hardware-configuration.nix
+	./boot.nix
+	./environment.nix
+	./fonts.nix
+	./i18n.nix
+	./networking.nix
+	./programs.nix
+	./services.nix
+	./users.nix
+    ];
   time.timeZone = "Europe/Lisbon";
-  security.rtkit.enable = true;
-  #sound.enable = true;
-  nixpkgs.config.pulseaudio = true;
-  swapDevices = [{
-    device = "/swapfile";
-    size = 16 * 1024; # 16GB
-  }];
+
+  services.xserver.enable = true;
 
   virtualisation.docker.enable = true;
 
-  system = {
-    autoUpgrade = {
-      enable = true;
-      allowReboot  = false;
-      flake = inputs.self.outPath;
-      flags = [
-        "--update-input"
-        "nixpkgs"
-        "--no-write-lock-file"
-        "-L" # print build logs
-      ];
-      dates = "02:00";
-      randomizedDelaySec = "45min";
-    };
-    stateVersion = "23.11";
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
+  services.xserver.xkb = {
+    layout = "pt";
+    variant = "";
   };
 
-  nixpkgs.config.permittedInsecurePackages = [ "openssl-1.1.1w"];
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-             "padre-2.1.0"
-           ];
+  console.keyMap = "pt-latin1";
 
+  services.printing.enable = true;
+
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+    '';
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.permittedInsecurePackages = [
+                "openssl-1.1.1w"
+              ];
+  system.stateVersion = "24.05"; # Did you read the comment?
+  home-manager.backupFileExtension="backup";
 }

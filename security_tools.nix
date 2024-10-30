@@ -1,5 +1,5 @@
 { pkgs ? import <nixpkgs> {} }:
-	pkgs.mkShell rec {
+	pkgs.mkShell {
     buildInputs = with pkgs; [
 		#DNS
 		aiodnsbrute amass bind dnsenum
@@ -29,7 +29,7 @@
 		gdb ghidra-bin pwndbg clang clang-tools
 		pwntools radare2 yara valgrind
 		#MOBILE
-		androguard apktool 
+		androguard apktool
 		dex2jar scrcpy
 		#NETWORKS
 		arping mitm6 netcat-gnu

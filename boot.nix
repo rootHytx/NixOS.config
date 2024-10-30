@@ -1,16 +1,12 @@
-{config, pkgs, lib, inputs, ...}:
+{pkgs, ...}:
 
 {
   boot = {
     loader = {
       systemd-boot.enable = true;
-      grub = {
-        enable = false;
-        device = "/dev/sda";
-        useOSProber = true;
-      };
     };
     supportedFilesystems = [ "ntfs" ];
+    kernelPackages = pkgs.linuxPackages_testing;
     #kernelParams = [ "snd-intel-dspcfg.dsp_driver=1" ];
   };
 }

@@ -1,4 +1,4 @@
-{config, pkgs, lib, inputs, ...}:
+{...}:
 
 {
  i18n = {

@@ -1,4 +1,4 @@
-{config, pkgs, lib, inputs, ...}:
+{...}:
 
 {
  networking = {
@@ -6,8 +6,8 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 8080 9993 631 ];
-      allowedUDPPorts = [ 8080 9993 631 ];
+      allowedTCPPorts = [ 80 8080 9993 631 3000 5007 ];
+      allowedUDPPorts = [ 80 8080 9993 631 3000 5007 ];
       #trustedInterfaces = [ "73a15e146065937a" ];
     };
   };

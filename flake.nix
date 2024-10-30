@@ -1,7 +1,8 @@
 {
   inputs = {
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    zed-editor.url = "github:zed-industries/zed/main";
+    nixd.url = "github:nix-community/nixd/main";
     home-manager = {
          url = "github:nix-community/home-manager";
          # The `follows` keyword in inputs is used for inheritance.
@@ -10,11 +11,9 @@
          # to avoid problems caused by different versions of nixpkgs.
          inputs.nixpkgs.follows = "nixpkgs";
        };
-    hyprlock.url = "github:hyprwm/hyprlock/main";
-    hyprpaper.url = "github:hyprwm/hyprpaper/main";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: 
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
     let
       system="x86_64-linux";
       default=import nixpkgs {inherit system;};

@@ -1,10 +1,5 @@
-with import <nixpkgs> {
-  crossSystem = {
-    config = "arm-unknown-linux-gnu";
-  };
-};
-{ pkgs ? import <nixpkgs> {} }:
-  pkgs.mkShell rec {
+ { pkgs ? import <nixpkgs> {} }:
+  pkgs.mkShell {
     buildInputs = with pkgs; [
       clang
       # Replace llvmPackages with llvmPackages_X, where X is the latest LLVM version (at the time of writing, 16)
@@ -28,11 +23,11 @@ with import <nixpkgs> {
       # add libraries here (e.g. pkgs.libvmi)
     ]);
     # Add glibc, clang, glib, and other headers to bindgen search path
-    BINDGEN_EXTRA_CLANG_ARGS = 
+    BINDGEN_EXTRA_CLANG_ARGS =
     # Includes normal include path
     (builtins.map (a: ''-I"${a}/include"'') [
       # add dev libraries here (e.g. pkgs.libvmi.dev)
-      pkgs.glibc.dev 
+      pkgs.glibc.dev
     ])
     # Includes with special directory paths
     ++ [

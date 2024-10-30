@@ -1,86 +1,26 @@
-{config, pkgs, default, ...}:
+{ pkgs, default, ... }:
 {
-  nixpkgs.overlays = [
-    (final: prev: {
-      catppuccin-gtk = prev.catppuccin-gtk.overrideAttrs (old: {
-        src = prev.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "gtk";
-          rev = "v${old.version}";
-          fetchSubmodules = true;
-          hash = "sha256-q5/VcFsm3vNEw55zq/vcM11eo456SYE5TQA3g2VQjGc=";
-        };
-        postUnpack = "";
-      });
-    })
-  ];
   home.username = "hytx";
   home.homeDirectory = "/home/hytx";
-  gtk = {
-    enable = true;
-    #theme = {
-    #  name = "catppuccin-macchiato-pink-compact+default";
-    #  package = pkgs.catppuccin-gtk.override {
-    #    accents = [ "pink" ];
-    #    size = "compact";
-    #    #tweaks = "default+black+rimless";
-    #    variant = "macchiato";
-    #  };
-    #};
-    theme = {
-      name = "Colloid-Pink-Dark-Compact";
-      package = default.colloid-gtk-theme.override{
-        themeVariants = ["pink"];
-        colorVariants = ["dark"];
-        sizeVariants = ["compact"];
-        tweaks = ["rimless"];
-      };
-    };
-    iconTheme = {
-      name = "Colloid-pink-dark";
-      package = default.colloid-icon-theme.override{
-        schemeVariants = ["default"];
-        colorVariants = ["pink"];
-      };
-    };
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-  
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
-  };
-  #dconf.settings = {
-  #  "org/gtk/settings/file-chooser" = {
-  #    sort-directories-first = true;
-  #  };
-  
-  #  # GTK4 Setup
-  #  "org/gnome/desktop/interface" = {
-  #    gtk-theme = "Catppuccin-Macchiato-Compact-Pink-Dark";
-  #    color-scheme = "prefer-dark";
-  #  };
-  #};
-  home.pointerCursor = {
-    gtk.enable = true;
-    x11.enable = true;
-    name = "Bibata-Modern-Ice";
-    package = default.bibata-cursors;
-    size = 24;
-  };
   programs = {
+    git = {
+      enable = true;
+      userEmail = "up201906931@up.pt";
+      userName = "hytx";
+    };
     neovim = {
+      defaultEditor = true;
+      plugins = with pkgs.vimPlugins; [
+        nvim-treesitter
+        elixir-tools-nvim
+        nvchad-ui
+      ];
       extraPackages = with pkgs; [
         lua-language-server
         python-lsp-server
       ];
     };
-    zsh = {  
+    zsh = {
       package = default.zsh;
       enable = true;
       enableCompletion = true;
@@ -88,46 +28,55 @@
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        cona = "echo cona";
+
+        #security="nix-shell /etc/nixos/security_tools.nix";
+        config = "zed /etc/nixos/configuration.nix";
+        cripto = "cd '/home/hytx/Desktop/CYBERSEC/CRIPTOGRAFIA APLICADA'";
+        cyber = "cd /home/hytx/Desktop/CYBERSEC/";
+        fastfetch = "fastfetch --raw /home/hytx/.config/fastfetch/nixos.sixel --logo-width 32 --logo-height 15 --logo-padding-top 0";
+        flake = "zed /etc/nixos/flake.nix";
+        fraude = "cd '/home/hytx/Desktop/CYBERSEC/DETEÇÃO DE FRAUDE'";
+        fsi = "cd '/home/hytx/Desktop/CYBERSEC/FSI'";
+        hardware = "cd /home/hytx/Desktop/CYBERSEC/SEGURANÇA-E-APLICAÇÕES-DE-HARDWARE-CONFIÁVEL";
+        home = "zed /etc/nixos/home.nix";
+        kali = "quickemu --vm /home/hytx/vms/kali-current.conf";
         ll = "ls -l";
-        journal="xournalpp";
-        rustrover="nix-shell /etc/nixos/rustshell.nix --command 'jetbrains-toolbox &'";
-        push="/home/hytx/push.sh";
-        disc="discord '--enable-features=UseOzonePlatform' '--ozone-platform=wayland'";
-        spot="spotify '--enable-features=UseOzonePlatform' '--ozone-platform=wayland'";
-        rebuild="sudo nixos-rebuild switch";
-        sistemas="cd /home/hytx/Desktop/CYBERSEC/SISTEMAS-EMBUTIDOS";
-        ssd="cd /home/hytx/Desktop/CYBERSEC/SEGURANÇA-DE-SISTEMAS-E-DADOS";
-        ses="cd /home/hytx/Desktop/CYBERSEC/SEGURANÇA-EM-ENGENHARIA-SOFTWARE";
-        hardware="cd /home/hytx/Desktop/CYBERSEC/SEGURANÇA-E-APLICAÇÕES-DE-HARDWARE-CONFIÁVEL";
-        cripto="cd '/home/hytx/Desktop/CYBERSEC/CRIPTOGRAFIA APLICADA'";
-        tools="subl /etc/nixos/security_tools.nix";
-        ops="cd '/home/hytx/Desktop/CYBERSEC/OPERAÇÕES DE SEGURANÇA'";
-        segredes="cd '/home/hytx/Desktop/CYBERSEC/SEGURANÇA DE REDES'";
-        redes="cd /home/hytx/Desktop/CYBERSEC/TÓPICOS-AVANÇADOS-EM-REDES";
-        cyber="cd /home/hytx/Desktop/CYBERSEC/";
-        config="nvim /etc/nixos/configuration.nix";
-        home="nvim /etc/nixos/home.nix";
-        flake="nvim /etc/nixos/flake.nix";
-        fraude="cd '/home/hytx/Desktop/CYBERSEC/DETEÇÃO DE FRAUDE'";
-        tpas="cd '/home/hytx/Desktop/CYBERSEC/TEORIA E PRÁTICA DE ATAQUES DE SEGURANÇA'";
-        security="nix-shell /etc/nixos/security_tools.nix";
-        fastfetch="fastfetch --raw /home/hytx/.config/fastfetch/nixos.sixel --logo-width 32 --logo-height 15 --logo-padding-top 0";
-        nix-shell="nix-shell --command zsh";
-        pyshell="nix-shell /etc/nixos/pyshell.nix";
+        nix-shell = "nix-shell --command zsh";
+        ops = "cd '/home/hytx/Desktop/CYBERSEC/OPERAÇÕES DE SEGURANÇA'";
+        rebuild = "sudo nixos-rebuild switch";
+        redes = "cd /home/hytx/Desktop/CYBERSEC/TÓPICOS-AVANÇADOS-EM-REDES";
+        segredes = "cd '/home/hytx/Desktop/CYBERSEC/SEGURANÇA DE REDES'";
+        ses = "cd /home/hytx/Desktop/CYBERSEC/SEGURANÇA-EM-ENGENHARIA-SOFTWARE";
+        sistemas = "cd /home/hytx/Desktop/CYBERSEC/SISTEMAS-EMBUTIDOS";
+        ssd = "cd /home/hytx/Desktop/CYBERSEC/SEGURANÇA-DE-SISTEMAS-E-DADOS";
+        ssh-add-keys = "source /home/hytx/scripts/ssh_add_script.sh";
+        tools = "subl /etc/nixos/security_tools.nix";
+        tpas = "cd '/home/hytx/Desktop/CYBERSEC/TEORIA E PRÁTICA DE ATAQUES DE SEGURANÇA'";
+        venv = "source /home/hytx/venv/bin/activate";
+        fsi-ctfcicd-source = "/home/hytx/Desktop/CYBERSEC/FSI/CICD/ctf-cicd/.env";
+        caido = "docker run --rm -p 7000:8080 -d caido/caido:latest";
       };
       oh-my-zsh = {
         enable = true;
-        plugins = [ "git" "thefuck" ];
+        plugins = [
+          "git"
+          "thefuck"
+        ];
         custom = "$HOME/.config/zsh/";
         theme = "my_custom_theme";
       };
       history.size = 10000;
       history.path = "/home/hytx/.config/zsh/history";
       initExtra = ''
-        if [ $(ps aux | grep -c hypr) -lt 2 ]; then	
-          Hyprland
-        fi
+        export PATH=$PATH:''${CARGO_HOME:-~/.cargo}/bin
+        export RUSTC_VERSION=$(echo "''${$(rustup toolchain list | tail -1)//-x86_64-unknown-linux-gnu/}")
+        RUSTC_VERSION_NO_UNDERLINE=$(echo $RUSTC_VERSION | tr -d '\n')
+        export PATH=$PATH:''${RUSTUP_HOME:-~/.rustup}/toolchains/$RUSTC_VERSION_NO_UNDERLINE-x86_64-unknown-linux-gnu/bin/
+        export PROTOBUF_LOCATION=/nix/store/$(ls -1 /nix/store | grep protobuf-25.3 | tail -n1)
+        export PROTOC=$PROTOBUF_LOCATION/bin/protoc
+        export PROTOC_INCLUDE=$PROTOBUF_LOCATION/include
+        export PATH=$PATH:/home/hytx/go/bin/
+        export PKG_CONFIG_PATH=/nix/store/$(ls -1 /nix/store | grep openssl-3.0.14-dev | tail -n1)/lib/pkgconfig
         fastfetch -c /home/hytx/.config/fastfetch/preset.jsonc --raw /home/hytx/.config/fastfetch/nixos.sixel --logo-width 32 --logo-height 15 --logo-padding-top 0
       '';
     };
