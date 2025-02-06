@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   fonts.packages = with pkgs; [
     liberation_ttf
@@ -8,7 +8,8 @@
     dina-font
     proggyfonts
     roboto
-    nerdfonts
+    nerd-fonts.hack
+    nerd-fonts.fira-code
     font-awesome
     source-code-pro
   ];

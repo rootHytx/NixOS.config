@@ -1,12 +1,15 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 
 {
   boot = {
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        consoleMode = "max";
+      };
     };
-    supportedFilesystems = [ "ntfs" ];
-    kernelPackages = pkgs.linuxPackages_testing;
-    #kernelParams = [ "snd-intel-dspcfg.dsp_driver=1" ];
+    kernelParams = [ "kvm.enable_virt_at_load=0" ];
+    kernelPackages = pkgs.linuxPackages_6_12;
+    extraModulePackages = [ pkgs.wireguard-go ];
   };
 }

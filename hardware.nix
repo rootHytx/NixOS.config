@@ -1,4 +1,6 @@
-{config, pkgs, lib, inputs, ...}:
+{
+  ...
+}:
 
 {
   hardware = {
@@ -6,12 +8,9 @@
       enable = true;
       powerOnBoot = true;
     };
-    pulseaudio = {
+    graphics = {
       enable = true;
-      package = pkgs.pulseaudioFull;
+      enable32Bit = true;
     };
-    graphics.enable = true;
-    enableAllFirmware  = true;
-    sensor.iio.enable = true;
   };
 }
