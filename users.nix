@@ -18,35 +18,40 @@
         "vboxuser"
       ];
       packages = with pkgs; [
+        (pkgs.callPackage ./zed-discord-presence.nix { })
         alacritty
+        caido
+        google-chrome
+        cheese
         cosmic-icons
         eog
         fastfetch
-        firefox
         gimp
+        inputs.nixd.packages."${pkgs.system}".nixd
+        inputs.nixfmt.packages."${pkgs.system}".nixfmt
         (lutris.override {
           extraLibraries = pkgs: [
             # List library dependencies here
           ];
         })
         markdown-oxide
-        inputs.nixd.packages."${pkgs.system}".nixd
-        inputs.nixfmt.packages."${pkgs.system}".nixfmt
-        #inputs.zed-editor.packages."${pkgs.system}".zed-editor
-        zed-editor
-        geoclue2
+        mission-center
+        nwg-look
         gnome-calculator
-        gnome-multi-writer
-        #ghidra
+        ghidra-bin
+        libgphoto2
         libreoffice-qt
         libreswan
         love
         nix-index
+        nix-search-cli
         nmap
-        nodejs_22
+        obsidian
         openssl
         openvpn
+        package-version-server
         papers
+        popsicle
         pptp
         qbittorrent
         qt6.full
@@ -54,7 +59,6 @@
         rust-analyzer
         rustc
         rustfmt
-        spice-gtk
         spotify
         stremio
         sublime4
@@ -63,11 +67,12 @@
         thefuck
         thunderbird
         unzip
+        vagrant
         vesktop
         vlc
         waybar
         wineWowPackages.stable
-        zerotierone
+        zed-editor
         zip
       ];
     };

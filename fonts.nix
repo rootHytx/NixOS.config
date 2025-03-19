@@ -12,5 +12,6 @@
     nerd-fonts.fira-code
     font-awesome
     source-code-pro
+    ubuntu-sans
   ];
 }

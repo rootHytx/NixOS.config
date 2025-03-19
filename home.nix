@@ -9,8 +9,6 @@ in
     username = "hytx";
     homeDirectory = "/home/hytx";
     pointerCursor = {
-      gtk.enable = true;
-      x11.enable = true;
       name = cursorName;
       package = cursorPackage;
       size = cursorSize;
@@ -31,7 +29,7 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "application/pdf" = "firefox.desktop";
+      "application/pdf" = "chromium.desktop";
     };
   };
   programs = {
@@ -48,19 +46,21 @@ in
       syntaxHighlighting.enable = true;
 
       shellAliases = {
-        caido = "docker run --rm -p 7000:8080 -d caido/caido:latest";
         config = "zed /etc/nixos/";
         ctfd = "docker compose -f /home/hytx/Desktop/CYBERSEC/FSI/local_teste/CTFd/docker-compose.yml";
         cyber = "cd /home/hytx/Desktop/CYBERSEC/";
         dbr = "/home/hytx/Desktop/ctf/build_run_docker.sh";
+        devShell = "python /etc/nixos/choose_devShell.py";
         dp = "cd '/home/hytx/Desktop/CYBERSEC/DIREITO-PRIVACIDADE'";
         #fastfetch = "fastfetch --raw /home/hytx/.config/fastfetch/nixos.sixel --logo-width 32 --logo-height 15 --logo-padding-top 0";
         fsi = "cd '/home/hytx/Desktop/CYBERSEC/FSI'";
         fsi-ctfcicd-source = "/home/hytx/Desktop/CYBERSEC/FSI/CICD/ctf-cicd/.env";
+        git-backup = "/home/hytx/scripts/push_git.sh";
         gsi = "cd '/home/hytx/Desktop/CYBERSEC/GSI'";
         kali = "quickemu --vm /home/hytx/vms/kali-current.conf";
         ll = "ls -l";
-        nervctf = "cd '/home/hytx/Desktop/CYBERSEC/FSI/CICD/NervCTF'";
+        nervctf = "cd '/home/hytx/Desktop/CYBERSEC/tese/NervCTF'";
+        nfu = "prev=$(pwd) ; /etc/nixos ; _ nix flake update ; rebuild ; cd $prev";
         nix-shell = "nix-shell --command zsh";
         rust = "nix-shell /etc/nixos/rustshell.nix";
         ops = "cd '/home/hytx/Desktop/CYBERSEC/OPERAÇÕES-DE-SEGURANÇA'";
@@ -69,6 +69,9 @@ in
         ssd = "cd /home/hytx/Desktop/CYBERSEC/SEGURANÇA-DE-SISTEMAS-E-DADOS";
         ssh-add-keys = "source /home/hytx/scripts/ssh_add_script.sh";
         venv = "source /home/hytx/venv/bin/activate";
+        xstf = "cd /home/hytx/Desktop/CYBERSEC/xstf";
+        xstf-internal = "~/.ssh/auto_ssh.sh xstf-internal";
+        xstf-bots = "~/.ssh/auto_ssh.sh xstf-bots";
         zed = "zeditor";
       };
       oh-my-zsh = {

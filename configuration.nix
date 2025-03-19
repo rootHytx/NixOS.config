@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -11,11 +11,10 @@
     ./services.nix
     ./users.nix
     ./hardware.nix
+    ./sensitive-environment.nix
   ];
   time.timeZone = "Europe/London";
   home-manager.backupFileExtension = "backup";
-  systemd.services."NetworkManager-wait-online".enable = false;
-  systemd.services.supergfxd.path = [ pkgs.pciutils ];
 
   virtualisation.docker.enable = true;
   virtualisation.virtualbox.host.enable = true;

@@ -5,7 +5,7 @@
     hostName = "nixos";
     networkmanager.enable = true;
     firewall = {
-      enable = true;
+      enable = false;
       allowedTCPPorts = [
         80
         8080

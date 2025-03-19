@@ -50,6 +50,20 @@
     tailscale = {
       enable = true;
     };
+    power-profiles-daemon.enable = true;
+    auto-cpufreq = {
+      enable = false;
+      settings = {
+        battery = {
+          governor = "performance";
+          turbo = "auto";
+        };
+        charger = {
+          governor = "performance";
+          turbo = "auto";
+        };
+      };
+    };
     xserver = {
       enable = true;
       dpi = 130;
@@ -60,6 +74,12 @@
       };
       displayManager.gdm.enable = false;
       desktopManager.gnome.enable = false;
+    };
+    zerotierone = {
+      enable = true;
+      joinNetworks = [
+        "73a15e146065937a"
+      ];
     };
   };
 }

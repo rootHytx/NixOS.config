@@ -5,7 +5,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    zed-editor.url = "github:zed-industries/zed/main";
     nixd.url = "github:nix-community/nixd/main";
     nixfmt.url = "github:NixOS/nixfmt/master";
     nixpkgs.follows = "nixos-cosmic/nixpkgs";
@@ -13,6 +12,10 @@
     xdg-desktop-portal-cosmic.url = "github:pop-os/xdg-desktop-portal-cosmic";
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zed = {
+      url = "github:zed-industries/zed";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -24,11 +27,20 @@
       home-manager,
       nixos-cosmic,
       asus-numberpad-driver,
+      zed,
       ...
     }:
     let
       system = "x86_64-linux";
-      default = import nixpkgs { inherit system; };
+      default = import nixpkgs {
+        inherit system;
+        overlays = [
+          zed.overlays.default
+          zed.overlays.rust-overlay
+          zed.overlays.rust-toolchain
+          zed.overlays.zed-editor
+        ];
+      };
     in
     {
       nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
@@ -38,7 +50,7 @@
           inherit default;
         };
         modules = [
-           asus-numberpad-driver.nixosModules.default
+          asus-numberpad-driver.nixosModules.default
           ./configuration.nix
           ./fonts.nix
           ./hardware-configuration.nix

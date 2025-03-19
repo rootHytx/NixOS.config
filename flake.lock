@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1737202370,
-        "narHash": "sha256-3uPJNMyLH5/r9mWhya+fFLJqaVV2zLt+HZOM8MctYdo=",
+        "lastModified": 1741963976,
+        "narHash": "sha256-SdvDY5evQ4jnWpA1ZwFPYGNPhPaT/G5zNaSLcGVFPyY=",
         "owner": "asus-linux-drivers",
         "repo": "asus-numberpad-driver",
-        "rev": "8507e85c17a59bb972ff674bc8b9bffecc9736db",
+        "rev": "410c32e4205969a65be5fd949c49c753d8c2f023",
         "type": "github"
       },
       "original": {
@@ -46,11 +46,11 @@
     },
     "crane_2": {
       "locked": {
-        "lastModified": 1736898272,
-        "narHash": "sha256-D10wlrU/HCpSRcb3a7yk+bU3ggpMD1kGbseKtO+7teo=",
+        "lastModified": 1741481578,
+        "narHash": "sha256-JBTSyJFQdO3V8cgcL08VaBUByEU6P5kXbTJN6R0PFQo=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "6a589f034202a7c6e10bce6c5d1d392d7bc0f340",
+        "rev": "bb1c9567c43e4434f54e9481eb4b8e8e0d50f0b5",
         "type": "github"
       },
       "original": {
@@ -222,11 +222,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1738753876,
-        "narHash": "sha256-yXT82kERWL4R81hfun9BuT478Q6ut0dJzdQjAxjRS38=",
+        "lastModified": 1742326330,
+        "narHash": "sha256-Tumt3tcMXJniSh7tw2gW+WAnVLeB3WWm+E+yYFnLBXo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f20b7a8ab527a2482f13754dc00b2deaddc34599",
+        "rev": "22a36aa709de7dd42b562a433b9cefecf104a6ee",
         "type": "github"
       },
       "original": {
@@ -258,11 +258,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1738432935,
-        "narHash": "sha256-D/r2NaMrO3jeYeTGg6v7fjWyPJ8omLcphCZ5WiM7xPc=",
+        "lastModified": 1742211936,
+        "narHash": "sha256-QykbG0ImOgKzju2J0z5ZoBbqdC5IeafPsGN3iqdRW1c=",
         "owner": "nix-community",
         "repo": "nixd",
-        "rev": "06d1c850614d0ea60b4f7e3fd89cca0628c21feb",
+        "rev": "8ac5582c7709dcbb95bc2bd903c978ef67707409",
         "type": "github"
       },
       "original": {
@@ -277,11 +277,11 @@
         "flake-utils": "flake-utils"
       },
       "locked": {
-        "lastModified": 1737982816,
-        "narHash": "sha256-/sPmiYMiISUy6HuBqFClXFtEYyf4rhWuw8SNNd7gkX8=",
+        "lastModified": 1741626067,
+        "narHash": "sha256-qUJ8L+ptmOYpo88R2QvmitAsD78tlAmajhC4cVA5nCA=",
         "owner": "NixOS",
         "repo": "nixfmt",
-        "rev": "e825e956ae967ee24aa502a90099956d1f8bc1ed",
+        "rev": "74a8d9aef93e59e7edbc4f2f59ad33fc8284bd8d",
         "type": "github"
       },
       "original": {
@@ -298,11 +298,11 @@
         "nixpkgs-stable": "nixpkgs-stable"
       },
       "locked": {
-        "lastModified": 1738719817,
-        "narHash": "sha256-yJbiwN9Se8+EVrsgaeBJYflp8dpMN827MZZun58I7Js=",
+        "lastModified": 1742351419,
+        "narHash": "sha256-IC3jdMFJtLnwnjNyCeQ1o9Y8gEmDw5RQ7ZLIXf0u7fs=",
         "owner": "lilyinstarlight",
         "repo": "nixos-cosmic",
-        "rev": "7d9637c0c3dcf5b55b48dbc0157dc11a06e56468",
+        "rev": "55c7223b2c739b4d948a4a84a8150cedcb779e53",
         "type": "github"
       },
       "original": {
@@ -341,11 +341,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1738574474,
-        "narHash": "sha256-rvyfF49e/k6vkrRTV4ILrWd92W+nmBDfRYZgctOyolQ=",
+        "lastModified": 1742136038,
+        "narHash": "sha256-DDe16FJk18sadknQKKG/9FbwEro7A57tg9vB5kxZ8kY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fecfeb86328381268e29e998ddd3ebc70bbd7f7c",
+        "rev": "a1185f4064c18a5db37c5c84e5638c78b46e3341",
         "type": "github"
       },
       "original": {
@@ -357,11 +357,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1738680400,
-        "narHash": "sha256-ooLh+XW8jfa+91F1nhf9OF7qhuA/y1ChLx6lXDNeY5U=",
+        "lastModified": 1742069588,
+        "narHash": "sha256-C7jVfohcGzdZRF6DO+ybyG/sqpo1h6bZi9T56sxLy+k=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "799ba5bffed04ced7067a91798353d360788b30d",
+        "rev": "c80f6a7e10b39afcc1894e02ef785b1ad0b0d7e5",
         "type": "github"
       },
       "original": {
@@ -387,22 +387,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
-      "locked": {
-        "lastModified": 1737062831,
-        "narHash": "sha256-Tbk1MZbtV2s5aG+iM99U8FqwxU/YNArMcWAv6clcsBc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "5df43628fdf08d642be8ba5b3625a6c70731c19c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "asus-numberpad-driver": "asus-numberpad-driver",
@@ -415,7 +399,7 @@
           "nixpkgs"
         ],
         "xdg-desktop-portal-cosmic": "xdg-desktop-portal-cosmic",
-        "zed-editor": "zed-editor"
+        "zed": "zed"
       }
     },
     "rust-analyzer-src": {
@@ -465,16 +449,16 @@
     "rust-overlay_2": {
       "inputs": {
         "nixpkgs": [
-          "zed-editor",
+          "zed",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1737166965,
-        "narHash": "sha256-vlDROBAgq+7PEVM0vaS2zboY6DXs3oKK0qW/1dVuFs4=",
+        "lastModified": 1741573199,
+        "narHash": "sha256-A2sln1GdCf+uZ8yrERSCZUCqZ3JUlOv1WE2VFqqfaLQ=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "fc839c9d5d1ebc789b4657c43c4d54838c7c01de",
+        "rev": "c777dc8a1e35407b0e80ec89817fe69970f4e81a",
         "type": "github"
       },
       "original": {
@@ -558,11 +542,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1738766442,
-        "narHash": "sha256-l9fHybGSphauxa5zKiHZkfV6ypjpo79OTC4/wWmcqUY=",
+        "lastModified": 1742225385,
+        "narHash": "sha256-iDXg+lZvPdckEI/XtlDx4T6ENqD+DlSEDrQEjsPx+ZQ=",
         "owner": "pop-os",
         "repo": "xdg-desktop-portal-cosmic",
-        "rev": "30ce50857933e58765607f37a8bf93be4742a41a",
+        "rev": "e52725d8d2f5862841bad3ce41ef3458268f6401",
         "type": "github"
       },
       "original": {
@@ -571,24 +555,25 @@
         "type": "github"
       }
     },
-    "zed-editor": {
+    "zed": {
       "inputs": {
         "crane": "crane_2",
         "flake-compat": "flake-compat_3",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1738781654,
-        "narHash": "sha256-tz5kddkXaYRCFDhIop/48un9mA17rhwQyRNyY2T8Ta0=",
+        "lastModified": 1742382591,
+        "narHash": "sha256-ZZzNwmAtHXgerQUHIHbAhZvoOIN1qgTYtW7W6ay2oKE=",
         "owner": "zed-industries",
         "repo": "zed",
-        "rev": "6d81ad1e0b5ed395d47a3f221f8a185a522c7375",
+        "rev": "44fff08ed68d8c2718bd41443a2b5d1ac7c821e9",
         "type": "github"
       },
       "original": {
         "owner": "zed-industries",
-        "ref": "main",
         "repo": "zed",
         "type": "github"
       }
