@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   fonts.packages = with pkgs; [
+    akira-unstable
     liberation_ttf
     fira-code
     fira-code-symbols

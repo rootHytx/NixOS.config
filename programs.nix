@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   programs = {
+    virt-manager.enable = true;
     zsh.enable = true;
     steam = {
       enable = true;

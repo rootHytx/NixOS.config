@@ -17,8 +17,8 @@
   home-manager.backupFileExtension = "backup";
 
   virtualisation.docker.enable = true;
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   console.keyMap = "pt-latin1";
   security.rtkit.enable = true;
@@ -27,8 +27,22 @@
     experimental-features = nix-command flakes
   '';
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "openssl-1.1.1w"
-  ];
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 10d";
+  };
+  nix.settings = {
+    trusted-users = [ "root" ];
+    auto-optimise-store = true;
+  };
+  nixpkgs.config = {
+    permittedInsecurePackages = [
+      "openssl-1.1.1w"
+      "qtwebengine-5.15.19"
+    ];
+    allowBroken = true;
+  };
+  security.pam.services.login.enableGnomeKeyring = true;
   system.stateVersion = "24.05"; # Did you read the comment?
 }

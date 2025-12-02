@@ -2,34 +2,16 @@
 
 {
   services = {
-    asus-numberpad-driver = {
-      enable = true;
-      layout = "up5401ea";
-      wayland = true;
-      runtimeDir = "/run/user/1000/";
-      waylandDisplay = "wayland-1";
-      config = {
-        "activation_time" = "0.5";
-        "multitouch" = "1";
-        "default_backlight_level" = "0x01";
-        "top_left_icon_brightness_func_max_min_only" = "1";
-        "top_left_icon_activation_time" = "0.5";
-        "top_left_icon_slide_func_activation_radius" = "1200";
-        "top_left_icon_slide_func_activates_numpad" = "1";
-      };
-    };
-    asusd = {
-      enable = true;
-      enableUserService = true;
-    };
     displayManager.cosmic-greeter.enable = true;
     desktopManager.cosmic.enable = true;
     fprintd = {
       enable = true;
     };
     logind = {
-      lidSwitch = "suspend";
+      settings.Login.HandleLidSwitch = "suspend";
     };
+    gnome.gnome-keyring.enable = true;
+    lorri.enable = true;
     openssh = {
       enable = true; # Enable the OpenSSH server
       settings = {
@@ -37,7 +19,6 @@
         PasswordAuthentication = false;
       };
     };
-
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -50,6 +31,7 @@
     tailscale = {
       enable = true;
     };
+    tumbler.enable = true;
     power-profiles-daemon.enable = true;
     auto-cpufreq = {
       enable = false;
@@ -72,14 +54,8 @@
         layout = "pt";
         variant = "";
       };
-      displayManager.gdm.enable = false;
-      desktopManager.gnome.enable = false;
-    };
-    zerotierone = {
-      enable = true;
-      joinNetworks = [
-        "73a15e146065937a"
-      ];
+      #displayManager.gdm.enable = false;
+      #desktopManager.gnome.enable = false;
     };
   };
 }

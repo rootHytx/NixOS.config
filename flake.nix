@@ -1,23 +1,22 @@
 {
   inputs = {
-    asus-numberpad-driver = {
-      url = "github:asus-linux-drivers/asus-numberpad-driver";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixd.url = "github:nix-community/nixd/main";
     nixfmt.url = "github:NixOS/nixfmt/master";
-    nixpkgs.follows = "nixos-cosmic/nixpkgs";
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    xdg-desktop-portal-cosmic.url = "github:pop-os/xdg-desktop-portal-cosmic";
+    nixos-cosmic = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:lilyinstarlight/nixos-cosmic";
+    };
+    xdg-desktop-portal-cosmic = {
+      url = "github:pop-os/xdg-desktop-portal-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zed = {
-      url = "github:zed-industries/zed";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #zed-editor.url = "github:zed-industries/zed/1f40a3c"; # last stable version
+    #zed-editor.url = "github:zed-industries/zed/main"; # LTS/Unstable
   };
 
   outputs =
@@ -26,8 +25,7 @@
       nixpkgs,
       home-manager,
       nixos-cosmic,
-      asus-numberpad-driver,
-      zed,
+      #zed-editor,
       ...
     }:
     let
@@ -35,10 +33,8 @@
       default = import nixpkgs {
         inherit system;
         overlays = [
-          zed.overlays.default
-          zed.overlays.rust-overlay
-          zed.overlays.rust-toolchain
-          zed.overlays.zed-editor
+          #(import ./overlays/cosmic-hashes.nix)
+          #zed-editor.overlays.default
         ];
       };
     in
@@ -50,14 +46,41 @@
           inherit default;
         };
         modules = [
-          asus-numberpad-driver.nixosModules.default
+          (
+            { pkgs, ... }:
+            {
+              nixpkgs.overlays = [
+                (self: super: {
+                  python314 = super.python314.override {
+                    packageOverrides = self: super: {
+                      pytest-mock = super.pytest-mock.overridePythonAttrs (old: {
+                        doCheck = false;
+                      });
+                      hypothesis = super.hypothesis.overridePythonAttrs (old: {
+                        doCheck = false;
+                      });
+                    };
+                  };
+                })
+                #zed-editor.overlays.default
+              ];
+              environment.systemPackages = [
+                pkgs.zed-editor
+              ];
+            }
+          )
           ./configuration.nix
           ./fonts.nix
           ./hardware-configuration.nix
           {
             nix.settings = {
-              substituters = [ "https://cosmic.cachix.org/" ];
-              trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+              substituters = [
+                "https://cosmic.cachix.org/"
+              ];
+              trusted-public-keys = [
+                "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+              ];
+
             };
           }
           nixos-cosmic.nixosModules.default

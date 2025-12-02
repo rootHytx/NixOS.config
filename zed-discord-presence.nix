@@ -14,5 +14,5 @@ pkgs.rustPlatform.buildRustPackage rec {
   cargoBuildFlags = "--package discord-presence-lsp";
 
   # Use fetchCargoVendor instead of fetchCargoTarball
-  useFetchCargoVendor = true;
+  # useFetchCargoVendor = true;
 }

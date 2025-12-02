@@ -33,7 +33,6 @@ pkgs.mkShell {
     pwndbg
     pwntools
     radare2
-    valgrind
     yara
     #MISC
     curl
