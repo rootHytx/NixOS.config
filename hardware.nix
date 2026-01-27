@@ -4,6 +4,7 @@
 
 {
   hardware = {
+    system76.power-daemon.enable = false;
     bluetooth = {
       enable = true;
       powerOnBoot = true;

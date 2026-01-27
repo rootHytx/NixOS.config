@@ -3,7 +3,58 @@
   inputs,
   ...
 }:
+let
+  extension = shortId: guid: {
+    name = guid;
+    value = {
+      install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${shortId}/latest.xpi";
+      installation_mode = "normal_installed";
+    };
+  };
 
+  prefs = {
+    "browser.ml.enable" = false;
+    "browser.preferences.experimental.hidden" = false;
+    "browser.theme.windows.accent-color-in-tabs.enabled" = true;
+    "browser.toolbars.bookmarks.visibility" = "always";
+    "browser.urlbar.placeholderName" = "DuckDuckGo";
+    "browser.urlbar.placeholderName.private" = "Google";
+    "browser.urlbar.quicksuggest.dataCollection.enabled" = false;
+    "devtools.chrome.enabled" = true;
+    "devtools.debugger.remote-enabled" = true;
+    "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
+    "extensions.webcompat.enable_interventions" = true;
+    "extensions.webcompat.enable_shims" = true;
+    "extensions.webcompat.perform_injections" = true;
+    "extensions.webcompat.perform_ua_overrides" = true;
+    "privacy.clearOnShutdown_v2.formdata" = true;
+    "privacy.globalprivacycontrol.was_ever_enabled" = true;
+    "privacy.history.custom" = true;
+    "sidebar.visibility" = "hide-sidebar";
+    "signon.rememberSignons" = false;
+    "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+    "zen.theme.accent-color" = "#c100fc";
+    "zen.theme.color-prefs.colorful" = true;
+    "zen.theme.content-element-separation" = 16;
+    "zen.theme.gradient.show-custom-colors" = true;
+    "zen.ui.migration.compact-mode-button-added" = true;
+    "zen.view.compact" = true;
+    "zen.view.compact.enable-at-startup" = false;
+    "zen.view.use-single-toolbar" = false;
+    "zen.watermark.enabled" = false;
+    "zen.welcome-screen.seen" = true;
+    "zen.welcomeScreen.seen" = true;
+    "zen.widget.linux.transparency" = true;
+    "zen.workspaces.continue-where-left-off" = true;
+    "zen.workspaces.separate-essentials" = true;
+  };
+
+  extensions = [
+    (extension "ublock-origin" "uBlock0@raymondhill.net")
+    (extension "nordpass-password-management" "nordpassStandalone@nordsecurity.com")
+  ];
+
+in
 {
   users.groups.libvirtd.members = [ "hytx" ];
   users.extraGroups.vboxusers.members = [ "hytx" ];
@@ -18,7 +69,6 @@
         "docker"
         "vboxuser"
         "libvirtd"
-        "openrazer"
       ];
       packages = with pkgs; [
         (lutris.override {
@@ -27,6 +77,51 @@
           ];
         })
         (pkgs.callPackage ./zed-discord-presence.nix { })
+        (pkgs.wrapFirefox
+          inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
+          {
+            extraPrefs = lib.concatLines (
+              lib.mapAttrsToList (
+                name: value: "lockPref(${lib.strings.toJSON name}, ${lib.strings.toJSON value});"
+              ) prefs
+            );
+
+            extraPolicies = {
+              DisableTelemetry = true;
+              ExtensionSettings = builtins.listToAttrs extensions;
+
+              SearchEngines = {
+                Default = "ddg";
+                Add = [
+                  {
+                    Name = "nixpkgs packages";
+                    URLTemplate = "https://search.nixos.org/packages?query={searchTerms}";
+                    IconURL = "https://wiki.nixos.org/favicon.ico";
+                    Alias = "@np";
+                  }
+                  {
+                    Name = "NixOS options";
+                    URLTemplate = "https://search.nixos.org/options?query={searchTerms}";
+                    IconURL = "https://wiki.nixos.org/favicon.ico";
+                    Alias = "@no";
+                  }
+                  {
+                    Name = "NixOS Wiki";
+                    URLTemplate = "https://wiki.nixos.org/w/index.php?search={searchTerms}";
+                    IconURL = "https://wiki.nixos.org/favicon.ico";
+                    Alias = "@nw";
+                  }
+                  {
+                    Name = "noogle";
+                    URLTemplate = "https://noogle.dev/q?term={searchTerms}";
+                    IconURL = "https://noogle.dev/favicon.ico";
+                    Alias = "@ng";
+                  }
+                ];
+              };
+            };
+          }
+        )
         alacritty
         brave
         caido
@@ -39,6 +134,7 @@
         exfatprogs
         fastfetch
         ffmpegthumbnailer
+        flatpak
         gdb
         ghidra-bin
         gimp
@@ -52,23 +148,19 @@
         kubernetes
         libffi
         libgphoto2
-        libreoffice-qt
-        #libreswan
+        libreoffice
         llvmPackages_20.bintools
         love
         markdown-oxide
         mattermost-desktop
         mission-center
         neofetch
-        nextcloud-client
         nix-index
         nix-search-cli
         nmap
-        nordpass
         nwg-look
         obsidian
         onionshare-gui
-        openssl
         openssl
         openvpn
         package-version-server
@@ -92,26 +184,22 @@
         rofi
         ruby
         rust-analyzer
-        rustc
+        rust-bindgen
         rustfmt
         rustup
         spotify
         spicetify-cli
         steam-run
-        (stremio.override {
-          nodejs = pkgs.nodejs_20;
-        })
+        #stremio
         swig
         texlab
         thunderbird
-        tmux
         tor-browser
         unzip
-        vagrant
+        uv
         valgrind
         vesktop
         vlc
-        waybar
         wineWowPackages.stable
         zip
         zed-editor

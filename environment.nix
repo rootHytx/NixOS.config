@@ -1,6 +1,10 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  config,
+  ...
+}:
 let
-  overrides = (builtins.fromTOML (builtins.readFile ./rust-toolchain.toml));
+  overrides = (fromTOML (builtins.readFile ./rust-toolchain.toml));
 in
 {
   environment = {
@@ -18,12 +22,14 @@ in
       gnome-tweaks
       qemu_full
       quickemu
-      xdg-desktop-portal-cosmic
       zlib
     ];
     etc = with pkgs; {
       "jdk".source = jdk;
       "jdk8".source = jdk8;
+      "qemu/bridge.conf".text = ''
+        allow br0
+      '';
     };
     shellInit = ''
       export PYTHONPATH=/home/hytx/venv/${pkgs.python3.sitePackages}:$PYTHONPATH
@@ -47,7 +53,7 @@ in
       LIBCLANG_PATH = with pkgs; lib.makeLibraryPath [ pkgs.llvmPackages_latest.libclang.lib ];
       CLUTTER_BACKEND = "wayland";
       COSMIC_DATA_CONTROL_ENABLED = 1;
-      DEFAULT_BROWSER = "${pkgs.google-chrome}/bin/google-chrome";
+      DEFAULT_BROWSER = "${pkgs.brave}/bin/brave";
       FASTFETCH_NIXOS_GENERATION = "$(basename $(readlink /nix/var/nix/profiles/system) | cut -d- -f2)";
       NIXPKGS_ALLOW_UNFREE = "1";
       GDK_DPI_SCALE = "1";
@@ -62,6 +68,10 @@ in
       XCURSOR_SIZE = 24;
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME = "$HOME/.local/share";
+      DEEPSEEK_API_KEY = config.deepseekAPIKey;
+      CTFD_TOKEN = config.xSTFCTFDToken;
+      CTFD_URL = config.xSTFCTFDURL;
+      DEPLOY_HOST = config.xSTFCTFDDeployHost;
       XDG_SESSION_TYPE = "wayland";
       WLR_DRM_NO_ATOMIC = "1";
       _JAVA_AWT_WM_NONEREPARENTING = "1";

@@ -39,10 +39,17 @@
   nixpkgs.config = {
     permittedInsecurePackages = [
       "openssl-1.1.1w"
-      "qtwebengine-5.15.19"
     ];
     allowBroken = true;
   };
-  security.pam.services.login.enableGnomeKeyring = true;
+  security = {
+    wrappers.qemu-bridge-helper = {
+      ### FOR THE QEMU VM BRIDGING TO HOST INTERFACE (see networking.nix and environment.nix)
+      setuid = true;
+      owner = "root";
+      group = "root";
+    };
+    pam.services.login.enableGnomeKeyring = true;
+  };
   system.stateVersion = "24.05"; # Did you read the comment?
 }

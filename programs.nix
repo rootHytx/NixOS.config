@@ -1,6 +1,12 @@
 { pkgs, ... }:
 {
   programs = {
+    nix-ld = {
+      enable = true;
+      libraries = [
+        pkgs.rustc
+      ];
+    };
     virt-manager.enable = true;
     zsh.enable = true;
     steam = {
