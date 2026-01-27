@@ -1,2 +1,2 @@
-./sensitive-environment.nix
-./flake.lock
+sensitive-environment.nix
+flake.lock
