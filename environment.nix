@@ -33,12 +33,27 @@ in
     };
     shellInit = ''
       export PYTHONPATH=/home/hytx/venv/${pkgs.python3.sitePackages}:$PYTHONPATH
-      #export PATH=/home/hytx/venv/bin:$PATH
       unset SOURCE_DATE_EPOCH
       export LD_LIBRARY_PATH=${pkgs.stdenv.cc.cc.lib}/lib:/run/opengl-driver/lib:$LD_LIBRARY_PATH
       export PATH=$PATH:''${CARGO_HOME:-~/.cargo}/bin
       export PATH=$PATH:''${RUSTUP_HOME:-~/.rustup}/toolchains/$RUSTC_VERSION-x86_64-unknown-linux-gnu/bin
       export PROTOC=${pkgs.protobuf_25}/bin/protoc
+      if [ -f /run/secrets/DEEPSEEK_API_KEY ]; then
+        export DEEPSEEK_API_KEY="$(cat /run/secrets/DEEPSEEK_API_KEY)"
+      fi
+      if [ -f /run/secrets/XSTF_CTFD_TOKEN ]; then
+        export XSTF_CTFD_TOKEN="$(cat /run/secrets/XSTF_CTFD_TOKEN)"
+      fi
+      if [ -f /run/secrets/XSTF_CTFD_URL ]; then
+        export XSTF_CTFD_URL="$(cat /run/secrets/XSTF_CTFD_URL)"
+      fi
+      if [ -f /run/secrets/XSTF_CTFD_DEPLOY_HOST ]; then
+        export XSTF_CTFD_DEPLOY_HOST="$(cat /run/secrets/XSTF_CTFD_DEPLOY_HOST)"
+      fi
+      if [ -f /run/secrets/INESC_VPN_CREDS ]; then
+        export INESC_VPN_CREDS="$(cat /run/secrets/INESC_VPN_CREDS)"
+      fi
+
     '';
 
     sessionVariables = {
@@ -69,10 +84,6 @@ in
       XCURSOR_SIZE = 24;
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME = "$HOME/.local/share";
-      DEEPSEEK_API_KEY = builtins.readFile config.sops.secrets.deepseekAPIKey.path;
-      CTFD_TOKEN = builtins.readFile config.sops.secrets.xSTFCTFDToken.path;
-      CTFD_URL = builtins.readFile config.sops.secrets.xSTFCTFDURL.path;
-      DEPLOY_HOST = builtins.readFile config.sops.secrets.xSTFCTFDDeployHost.path;
       XDG_SESSION_TYPE = "wayland";
       WLR_DRM_NO_ATOMIC = "1";
       _JAVA_AWT_WM_NONEREPARENTING = "1";

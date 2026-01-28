@@ -22,6 +22,7 @@
       self,
       nixpkgs,
       home-manager,
+      sops-nix,
       ...
     }:
     let
@@ -43,9 +44,8 @@
           ./configuration.nix
           ./fonts.nix
           ./hardware-configuration.nix
-          ./sops.nix
           home-manager.nixosModules.home-manager
-          inputs.sops-nix.nixosModules.sops
+          sops-nix.nixosModules.sops
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

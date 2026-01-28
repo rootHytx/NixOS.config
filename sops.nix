@@ -2,38 +2,35 @@
 {
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml;
+    #sops.defaultSopsFile = "/root/.sops/secrets/example.yaml";
+    #sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     age.keyFile = "/home/hytx/.config/sops/age/keys.txt";
 
     secrets = {
-      deepseekAPIKey = {
+      DEEPSEEK_API_KEY = {
         mode = "0400";
         owner = "root";
         group = "root";
-        path = "/run/secrets/deepseek-api-key";
       };
-      xSTFCTFDToken = {
+      XSTF_CTFD_TOKEN = {
         mode = "0400";
         owner = "root";
         group = "root";
-        path = "/run/secrets/ctfd-token";
       };
-      xSTFCTFDURL = {
+      XSTF_CTFD_URL = {
         mode = "0400";
         owner = "root";
         group = "root";
-        path = "/run/secrets/ctfd-url";
       };
-      xSTFCTFDDeployHost = {
+      XSTF_CTFD_DEPLOY_HOST = {
         mode = "0400";
         owner = "root";
         group = "root";
-        path = "/run/secrets/ctfd-deploy-host";
       };
-      INESCTECVPNConfig = {
+      INESC_VPN_CREDS = {
         mode = "0400";
         owner = "root";
         group = "root";
-        path = "/etc/openvpn/inesctec.conf";
       };
     };
   };
