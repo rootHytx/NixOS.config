@@ -68,10 +68,10 @@ in
       XCURSOR_SIZE = 24;
       XDG_CONFIG_HOME = "$HOME/.config";
       XDG_DATA_HOME = "$HOME/.local/share";
-      DEEPSEEK_API_KEY = config.deepseekAPIKey;
-      CTFD_TOKEN = config.xSTFCTFDToken;
-      CTFD_URL = config.xSTFCTFDURL;
-      DEPLOY_HOST = config.xSTFCTFDDeployHost;
+      DEEPSEEK_API_KEY = "config.deepseekAPIKey";
+      CTFD_TOKEN = "config.xSTFCTFDToken";
+      CTFD_URL = "config.xSTFCTFDURL";
+      DEPLOY_HOST = "config.xSTFCTFDDeployHost";
       XDG_SESSION_TYPE = "wayland";
       WLR_DRM_NO_ATOMIC = "1";
       _JAVA_AWT_WM_NONEREPARENTING = "1";
