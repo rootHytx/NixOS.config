@@ -22,15 +22,15 @@
         PasswordAuthentication = false;
       };
     };
-    openvpn = {
-      servers = {
-        inesc = {
-          config = config.INESCTECVPNConfig;
-          autoStart = false;
-          updateResolvConf = true;
-        };
-      };
-    };
+    #openvpn = {
+    #  servers = {
+    #    inesc = {
+    #      config = config.INESCTECVPNConfig;
+    #      autoStart = false;
+    #      updateResolvConf = true;
+    #    };
+    #  };
+    #};
     pipewire = {
       enable = true;
       alsa.enable = true;
