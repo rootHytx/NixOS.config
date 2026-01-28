@@ -99,7 +99,7 @@ in
         minecraft = "nix-shell -p steam --run 'steam-run java -jar /home/hytx/Games/TLauncher/TLauncher.jar'";
         nervctf = "cd '/home/hytx/Desktop/CYBERSEC/tese/NervCTF'";
         nfu = "ulimit -n 4096; prev=$(pwd) ; /etc/nixos ; _ nix flake update ; rebuild ; cd $prev";
-        nix-shell = "nix-shell --command 'source /home/hytx/.zshrc'";
+        #nix-shell = "nix-shell --command 'source /home/hytx/.zshrc'";
         rebuild = "sudo nixos-rebuild switch";
         venv = "source ~/.venv/bin/activate";
         xstf = "cd /home/hytx/Desktop/CYBERSEC/xstf";

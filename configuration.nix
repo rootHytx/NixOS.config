@@ -11,6 +11,7 @@
     ./services.nix
     ./users.nix
     ./hardware.nix
+    ./sops.nix
   ];
   time.timeZone = "Europe/London";
   home-manager.backupFileExtension = "backup";

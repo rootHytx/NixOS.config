@@ -1,2 +1,2 @@
 sensitive-environment.nix
-secrets/
+#flake.lock

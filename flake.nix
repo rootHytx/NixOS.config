@@ -43,6 +43,7 @@
           ./configuration.nix
           ./fonts.nix
           ./hardware-configuration.nix
+          ./sops.nix
           home-manager.nixosModules.home-manager
           inputs.sops-nix.nixosModules.sops
           {
