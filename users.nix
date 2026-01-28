@@ -141,8 +141,8 @@ in
         gnome-calculator
         go
         guvcview
-        inputs.nixd.packages."${pkgs.system}".nixd
-        inputs.nixfmt.packages."${pkgs.system}".nixfmt
+        inputs.nixd.packages."${pkgs.stdenv.hostPlatform.system}".nixd
+        inputs.nixfmt.packages."${pkgs.stdenv.hostPlatform.system}".nixfmt
         jdk
         jre
         kubernetes
