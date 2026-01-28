@@ -64,6 +64,7 @@ in
       isNormalUser = true;
       shell = pkgs.zsh;
       extraGroups = [
+        "root"
         "networkmanager"
         "wheel"
         "docker"

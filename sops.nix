@@ -1,4 +1,9 @@
 { ... }:
+let
+  mode = "0400";
+  owner = "root";
+  group = "root";
+in
 {
   sops = {
     defaultSopsFile = ./secrets/secrets.yaml;
@@ -8,29 +13,29 @@
 
     secrets = {
       DEEPSEEK_API_KEY = {
-        mode = "0400";
-        owner = "root";
-        group = "root";
+        mode = mode;
+        owner = owner;
+        group = group;
       };
       XSTF_CTFD_TOKEN = {
-        mode = "0400";
-        owner = "root";
-        group = "root";
+        mode = mode;
+        owner = owner;
+        group = group;
       };
       XSTF_CTFD_URL = {
-        mode = "0400";
-        owner = "root";
-        group = "root";
+        mode = mode;
+        owner = owner;
+        group = group;
       };
       XSTF_CTFD_DEPLOY_HOST = {
-        mode = "0400";
-        owner = "root";
-        group = "root";
+        mode = mode;
+        owner = owner;
+        group = group;
       };
       INESC_VPN_CREDS = {
-        mode = "0400";
-        owner = "root";
-        group = "root";
+        mode = mode;
+        owner = owner;
+        group = group;
       };
     };
   };
