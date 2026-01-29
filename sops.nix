@@ -1,6 +1,6 @@
 { ... }:
 let
-  mode = "0400";
+  mode = "0440";
   owner = "root";
   group = "root";
 in

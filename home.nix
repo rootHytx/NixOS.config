@@ -209,28 +209,6 @@ in
               };
             };
           };
-          discord_presence = {
-            initialization_options = {
-              application_id = "1263505205522337886";
-              base_icons_url = "https://raw.githubusercontent.com/xhyrom/zed-discord-presence/main/assets/icons/";
-
-              state = "Working on {filename}";
-              details = "";
-              large_image = "{base_icons_url}/{language}.png";
-              large_text = "{language:u}";
-              small_image = "{base_icons_url}/zed.png";
-              small_text = "Zed";
-
-              idle = null;
-
-              rules = {
-                mode = "blacklist";
-                paths = [ "/etc/nixos/" ];
-              };
-
-              git_integration = true;
-            };
-          };
         };
         languages = {
           Nix = {

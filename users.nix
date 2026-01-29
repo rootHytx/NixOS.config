@@ -77,7 +77,6 @@ in
             # List library dependencies here
           ];
         })
-        (pkgs.callPackage ./zed-discord-presence.nix { })
         (pkgs.wrapFirefox
           inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
           {
@@ -204,6 +203,7 @@ in
         wineWowPackages.stable
         zip
         zed-editor
+        zed-discord-presence
       ];
 
     };
