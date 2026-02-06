@@ -123,7 +123,8 @@ in
           }
         )
         alacritty
-        brave
+        basedpyright
+        #brave
         caido
         cargo
         cheese

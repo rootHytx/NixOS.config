@@ -1,6 +1,6 @@
 {
   pkgs,
-  config,
+  inputs,
   ...
 }:
 let
@@ -69,7 +69,9 @@ in
       LIBCLANG_PATH = with pkgs; lib.makeLibraryPath [ pkgs.llvmPackages_latest.libclang.lib ];
       CLUTTER_BACKEND = "wayland";
       COSMIC_DATA_CONTROL_ENABLED = 1;
-      DEFAULT_BROWSER = "${pkgs.brave}/bin/brave";
+      DEFAULT_BROWSER = "${
+        inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped
+      }/bin/zen";
       FASTFETCH_NIXOS_GENERATION = "$(basename $(readlink /nix/var/nix/profiles/system) | cut -d- -f2)";
       NIXPKGS_ALLOW_UNFREE = "1";
       GDK_DPI_SCALE = "1";

@@ -162,9 +162,9 @@ in
           };
         };
         lsp = {
-          ty = {
+          basedpyright = {
             binary = {
-              path = "${pkgs.ty}/bin/ty";
+              path = "${pkgs.basedpyright}/bin/basedpyright";
             };
             settings = {
               python-analysis = {
@@ -201,7 +201,7 @@ in
           };
           nixd = {
             binary = {
-              path_lookup = true;
+              path = "${pkgs.nixd}/bin/nixd";
             };
             settings = {
               diagnostic = {
