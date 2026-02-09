@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 {
   networking = {
@@ -27,5 +27,25 @@
     };
     networkmanager.enable = true;
     networkmanager.settings."connection"."wifi.powersave" = 2;
+    wg-quick.interfaces = {
+      wg0 = {
+        # pubkey = jvUEesn8F3FKYaeAACCmj55VqE15mQOSC795WtMIW1E=
+        address = [
+          "10.70.16.2/32"
+        ];
+        dns = [ "10.70.16.1" ];
+        privateKeyFile = config.sops.secrets.INESC_WG_PRIVKEY.path;
+        peers = [
+          {
+            publicKey = "akaWAmsS5FzO8Xmjeru9q2n2ijgi0xpzPBKnVJFIVwY=";
+            allowedIPs = [
+              "10.70.16.1/24"
+            ];
+            endpoint = "pe01:51820";
+            persistentKeepalive = 25;
+          }
+        ];
+      };
+    };
   };
 }

@@ -37,6 +37,11 @@ in
         owner = owner;
         group = group;
       };
+      INESC_WG_PRIVKEY = {
+        mode = mode;
+        owner = owner;
+        group = group;
+      };
     };
   };
 }
