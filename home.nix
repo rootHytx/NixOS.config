@@ -83,6 +83,12 @@ in
       enable = true;
       lfs.enable = true;
     };
+    ssh = {
+      enable = true;
+      enableDefaultConfig = false;
+      #matchBlocks = import ./ssh-config.nix;
+      matchBlocks = import ./ssh-config.nix;
+    };
     zsh = {
       package = default.zsh;
       enable = true;
@@ -99,7 +105,7 @@ in
         minecraft = "nix-shell -p steam --run 'steam-run java -jar /home/hytx/Games/TLauncher/TLauncher.jar'";
         nervctf = "cd '/home/hytx/Desktop/CYBERSEC/tese/NervCTF'";
         nfu = "ulimit -n 4096; prev=$(pwd) ; /etc/nixos ; _ nix flake update ; rebuild ; cd $prev";
-        #nix-shell = "nix-shell --command 'source /home/hytx/.zshrc'";
+        #ns = "nix shell nixpkgs#$1";
         rebuild = "sudo nixos-rebuild switch";
         venv = "source ~/.venv/bin/activate";
         xstf = "cd /home/hytx/Desktop/CYBERSEC/xstf";
@@ -111,18 +117,19 @@ in
           "git"
         ];
         custom = "$HOME/.config/zsh/";
-        theme = "custom-normal";
+        theme = "darkblood-custom";
       };
-      history.size = 10000;
+      history.size = 1000000;
       history.path = "/home/hytx/.config/zsh/history";
       initContent = ''
         export ZSH_COMPDUMP=/tmp/.zcompdump-$HOST
         export PATH=$PATH:/home/hytx/go/bin/
         if [[ -n $IN_NIX_SHELL ]]; then
-            TERM_APPEARANCE="[nix-shell]"
+            WHOIS="nix-shell"
         else
             unset TERM_APPEARANCE; fastfetch --config ~/.config/fastfetch/preset1.jsonc
         fi
+        source ~/.config/zsh/ns.zsh
       '';
     };
     zed-editor = {

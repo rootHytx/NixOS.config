@@ -31,17 +31,17 @@
       wg0 = {
         # pubkey = jvUEesn8F3FKYaeAACCmj55VqE15mQOSC795WtMIW1E=
         address = [
-          "10.70.16.2/32"
+          "10.59.0.2/32"
         ];
-        dns = [ "10.70.16.1" ];
+        #dns = [ "10.50.20.1" ];
         privateKeyFile = config.sops.secrets.INESC_WG_PRIVKEY.path;
         peers = [
           {
             publicKey = "akaWAmsS5FzO8Xmjeru9q2n2ijgi0xpzPBKnVJFIVwY=";
             allowedIPs = [
-              "10.70.16.1/24"
+              "10.50.0.0/16"
             ];
-            endpoint = "pe01:51820";
+            endpoint = "pe01.inesctec.pt:443";
             persistentKeepalive = 25;
           }
         ];

@@ -23,6 +23,17 @@ in
       qemu_full
       quickemu
       zlib
+      (pkgs.writeScriptBin "ns" ''
+        #!/usr/bin/env zsh
+
+        if [ $# -eq 0 ]; then
+          echo "Usage: ns <package-name>"
+          echo "Example: ns dnslookup"
+          exit 1
+        fi
+
+        exec nix shell nixpkgs#"$1" --set-env-var IN_NIX_SHELL 1
+      '')
     ];
     etc = with pkgs; {
       "jdk".source = jdk;

@@ -201,7 +201,7 @@ in
         valgrind
         vesktop
         vlc
-        wineWowPackages.stable
+        wineWow64Packages.stable
         zip
         zed-editor
         zed-discord-presence

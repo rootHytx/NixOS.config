@@ -16,7 +16,7 @@
     };
     gnome.gnome-keyring.enable = true;
     openssh = {
-      enable = true; # Enable the OpenSSH server
+      enable = false; # Enable the OpenSSH server
       settings = {
         PermitRootLogin = "no";
         PasswordAuthentication = false;
