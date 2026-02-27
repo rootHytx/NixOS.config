@@ -126,12 +126,11 @@ in
         minecraft = "nix-shell -p steam --run 'steam-run java -jar /home/hytx/Games/TLauncher/TLauncher.jar'";
         nervctf = "cd '/home/hytx/Desktop/CYBERSEC/tese/NervCTF'";
         nfu = "ulimit -n 4096; prev=$(pwd) ; /etc/nixos ; _ nix flake update ; rebuild ; cd $prev";
-        #ns = "nix shell nixpkgs#$1";
         rebuild = "sudo nixos-rebuild switch";
         venv = "source ~/.venv/bin/activate";
         xstf = "cd /home/hytx/Desktop/CYBERSEC/xstf";
         zed = "zeditor";
-        zsh-remote = "cd ~/scripts && ./zsh_remote_install.sh";
+        zsh-remote = "cd ~/scripts ; ./zsh_remote_install.sh $1 ; cd $prev";
       };
       oh-my-zsh = {
         enable = true;
