@@ -4,7 +4,7 @@
     nix-ld = {
       enable = true;
       libraries = [
-        pkgs.rustc
+        #pkgs.rustc
       ];
     };
     virt-manager.enable = true;

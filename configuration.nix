@@ -15,10 +15,11 @@
   ];
   time.timeZone = "Europe/London";
   home-manager.backupFileExtension = "backup";
-
-  virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
+  };
 
   console.keyMap = "pt-latin1";
   security.rtkit.enable = true;
@@ -26,7 +27,6 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-  nixpkgs.config.allowUnfree = true;
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -37,10 +37,8 @@
     auto-optimise-store = true;
   };
   nixpkgs.config = {
-    permittedInsecurePackages = [
-      "openssl-1.1.1w"
-    ];
     allowBroken = true;
+    allowUnfree = true;
   };
   security = {
     wrappers.qemu-bridge-helper = {

@@ -24,6 +24,23 @@ in
       package = cursorPackage;
       size = cursorSize;
     };
+    file.".zprofile".text = ''
+      if [ -f /run/secrets/DEEPSEEK_API_KEY ]; then
+        export DEEPSEEK_API_KEY="$(cat /run/secrets/DEEPSEEK_API_KEY)"
+      fi
+      if [ -f /run/secrets/XSTF_CTFD_TOKEN ]; then
+        export XSTF_CTFD_TOKEN="$(cat /run/secrets/XSTF_CTFD_TOKEN)"
+      fi
+      if [ -f /run/secrets/XSTF_CTFD_URL ]; then
+        export XSTF_CTFD_URL="$(cat /run/secrets/XSTF_CTFD_URL)"
+      fi
+      if [ -f /run/secrets/XSTF_CTFD_DEPLOY_HOST ]; then
+        export XSTF_CTFD_DEPLOY_HOST="$(cat /run/secrets/XSTF_CTFD_DEPLOY_HOST)"
+      fi
+      if [ -f /run/secrets/INESC_VPN_CREDS ]; then
+        export INESC_VPN_CREDS="$(cat /run/secrets/INESC_VPN_CREDS)"
+      fi
+    '';
   };
   gtk = {
     enable = true;
@@ -86,8 +103,11 @@ in
     ssh = {
       enable = true;
       enableDefaultConfig = false;
-      #matchBlocks = import ./ssh-config.nix;
-      matchBlocks = import ./ssh-config.nix;
+      matchBlocks =
+        import ./ssh/dcc.nix
+        // import ./ssh/inesc.nix
+        // import ./ssh/personal.nix
+        // import ./ssh/xstf.nix;
     };
     zsh = {
       package = default.zsh;
@@ -97,6 +117,7 @@ in
       syntaxHighlighting.enable = true;
 
       shellAliases = {
+        balatro = "love /home/hytx/.local/share/Steam/steamapps/common/Balatro/Balatro.exe";
         clear = "clear ; fastfetch-custom";
         config = "zed /etc/nixos/";
         ctfd = "docker compose -f /home/hytx/Desktop/CYBERSEC/xstf/CTFd-local/docker-compose.yml";
@@ -110,6 +131,7 @@ in
         venv = "source ~/.venv/bin/activate";
         xstf = "cd /home/hytx/Desktop/CYBERSEC/xstf";
         zed = "zeditor";
+        zsh-remote = "cd ~/scripts && ./zsh_remote_install.sh";
       };
       oh-my-zsh = {
         enable = true;
@@ -119,6 +141,7 @@ in
         custom = "$HOME/.config/zsh/";
         theme = "darkblood-custom";
       };
+
       history.size = 1000000;
       history.path = "/home/hytx/.config/zsh/history";
       initContent = ''

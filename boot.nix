@@ -19,11 +19,26 @@
       "boot.shell_on_fail"
       "udev.log_priority=3"
       "rd.systemd.show_status=auto"
+      "quiet"
+      "udev.log_level=3"
+      "systemd.show_status=auto"
     ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    plymouth = {
+      enable = true;
+      logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
+      font = "${pkgs.nerd-fonts.hack}/share/fonts/truetype/NerdFonts/Hack/HackNerdFont-Italic.ttf";
+      theme = "matrix";
+      themePackages = with pkgs; [
+        plymouth-matrix-theme
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ ];
+        })
+      ];
+    };
 
-    # Enable "Silent boot"
     consoleLogLevel = 3;
-    initrd.verbose = true;
+    initrd.verbose = false;
+    loader.timeout = 0;
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 }

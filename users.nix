@@ -127,6 +127,7 @@ in
         #brave
         caido
         cargo
+        catppuccin-plymouth
         cheese
         clang
         cmake
@@ -182,14 +183,15 @@ in
         python3Packages.python-dotenv
         python3Packages.opencv-python
         qbittorrent
+        qemu
         rofi
         ruby
         rust-analyzer
         rust-bindgen
         rustfmt
         rustup
-        spotify
-        spicetify-cli
+        spotify-cli-linux
+        spotifyd
         steam-run
         #stremio
         swig

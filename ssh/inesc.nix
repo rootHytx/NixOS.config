@@ -1,4 +1,9 @@
 {
+  "auth" = {
+    host = "auth";
+    hostname = "10.11.2.144";
+    user = "hytx";
+  };
   "k8sdev01" = {
     host = "k8sdev01";
     hostname = "10.61.14.97";

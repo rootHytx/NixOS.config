@@ -68,8 +68,8 @@
 
   "upCTF-CTFd" = {
     host = "upCTF-CTFd";
-    hostname = "46.225.107.220";
-    user = "root";
+    hostname = "ctfd.tailfff72.ts.net";
+    user = "hytx";
   };
 
   "upCTF-challs" = {
