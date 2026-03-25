@@ -147,6 +147,7 @@ in
         inputs.nixfmt.packages."${pkgs.stdenv.hostPlatform.system}".nixfmt
         jdk
         jre
+        kitty
         kubernetes
         libffi
         libgphoto2
@@ -156,7 +157,6 @@ in
         markdown-oxide
         mattermost-desktop
         mission-center
-        neofetch
         nix-index
         nix-search-cli
         nmap
@@ -190,14 +190,12 @@ in
         rust-bindgen
         rustfmt
         rustup
-        spotify-cli-linux
-        spotifyd
+        spotify-player
         steam-run
-        #stremio
         swig
         texlab
-        thunderbird
         tor-browser
+        typer
         unzip
         uv
         valgrind

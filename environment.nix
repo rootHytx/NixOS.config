@@ -17,6 +17,7 @@ in
       home-manager
       libinput
       libudev-zero
+      nix-direnv
       ntfs3g
       openvpn
       gnome-tweaks

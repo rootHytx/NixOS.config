@@ -124,13 +124,13 @@ in
         cyber = "cd /home/hytx/Desktop/CYBERSEC/";
         fastfetch-custom = "fastfetch --config ~/.config/fastfetch/preset1.jsonc";
         minecraft = "nix-shell -p steam --run 'steam-run java -jar /home/hytx/Games/TLauncher/TLauncher.jar'";
-        nervctf = "cd '/home/hytx/Desktop/CYBERSEC/tese/NervCTF'";
         nfu = "ulimit -n 4096; prev=$(pwd) ; /etc/nixos ; _ nix flake update ; rebuild ; cd $prev";
+        python = "~/.venv/bin/python";
         rebuild = "sudo nixos-rebuild switch";
+        typer = "typer --config ~/.config/typer/typer.yaml";
         venv = "source ~/.venv/bin/activate";
         xstf = "cd /home/hytx/Desktop/CYBERSEC/xstf";
         zed = "zeditor";
-        zsh-remote = "cd ~/scripts ; ./zsh_remote_install.sh $1 ; cd $prev";
       };
       oh-my-zsh = {
         enable = true;
@@ -143,7 +143,9 @@ in
 
       history.size = 1000000;
       history.path = "/home/hytx/.config/zsh/history";
+      #  eval "$(direnv hook zsh)"
       initContent = ''
+        eval "$(direnv hook zsh)"
         export ZSH_COMPDUMP=/tmp/.zcompdump-$HOST
         export PATH=$PATH:/home/hytx/go/bin/
         if [[ -n $IN_NIX_SHELL ]]; then
@@ -152,11 +154,15 @@ in
             unset TERM_APPEARANCE; fastfetch --config ~/.config/fastfetch/preset1.jsonc
         fi
         source ~/.config/zsh/ns.zsh
+        source ~/.config/zsh/zsh-remote.zsh
       '';
     };
     zed-editor = {
       enable = true;
-      extraPackages = [ pkgs.rustc ];
+      extraPackages = [
+        pkgs.rustc
+        pkgs.pkg-config
+      ]; # add pkg-config
       userSettings = {
         vim_mode = false;
 
@@ -191,16 +197,18 @@ in
           };
         };
         lsp = {
-          basedpyright = {
+
+          ty = {
             binary = {
-              path = "${pkgs.basedpyright}/bin/basedpyright";
+              path = "${pkgs.ty}/bin/ty";
+              arguments = [ "server" ];
             };
             settings = {
-              python-analysis = {
-                diagnosticMode = "workspace";
-                typeCheckingMode = "standard";
+              configuration = {
+                environment = {
+                  python = "~/.venv";
+                };
               };
-              venvPath = "/home/hytx/.venv";
             };
           };
           rust-analyzer = {
@@ -225,6 +233,11 @@ in
               };
               checkOnSave = {
                 command = "clippy";
+              };
+              cargo = {
+                extraEnv = {
+                  PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+                };
               };
             };
           };
@@ -270,6 +283,19 @@ in
       };
     };
   };
+  xdg.desktopEntries.spotify-player = {
+    name = "Spotify Player";
+    comment = "Lauch Spotify as cli in default terminal";
+    exec = "${pkgs.kitty}/bin/kitty -e ${pkgs.spotify-player}/bin/spotify_player";
+    terminal = false;
+    categories = [
+      "Audio"
+      "Music"
+      "Network"
+    ];
+  };
+  gtk.gtk4.theme = null;
+  programs.git.signing.format = null;
   home.stateVersion = "23.11";
   programs.home-manager.enable = true;
   home.enableNixpkgsReleaseCheck = false;
