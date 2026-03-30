@@ -145,6 +145,7 @@ in
         guvcview
         inputs.nixd.packages."${pkgs.stdenv.hostPlatform.system}".nixd
         inputs.nixfmt.packages."${pkgs.stdenv.hostPlatform.system}".nixfmt
+        inputs.youtube-tui.defaultPackage.x86_64-linux
         jdk
         jre
         kitty
@@ -171,6 +172,7 @@ in
         popsicle
         pptp
         protobuf_25
+        ps_mem
         python315
         python3Packages.distutils
         python3Packages.flask

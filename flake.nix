@@ -1,7 +1,6 @@
 {
   inputs = {
-    #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs/5b2c2d84341b2afb5647081c1386a80d7a8d8605"; # REGRESSION: duplicate dbus-settings-bindings source in cosmic-settings-daemon's vendor archive
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixd.url = "github:nix-community/nixd/main";
     nixfmt.url = "github:NixOS/nixfmt/master";
     home-manager = {
@@ -16,6 +15,10 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    youtube-tui = {
+      url = "github:Siriusmart/youtube-tui/6139b99714a0163d01767d926079ea8c97945ade";
+      # inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -24,6 +27,7 @@
       nixpkgs,
       home-manager,
       sops-nix,
+      youtube-tui,
       ...
     }:
     let
