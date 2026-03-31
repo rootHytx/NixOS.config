@@ -158,6 +158,7 @@ in
         markdown-oxide
         mattermost-desktop
         mission-center
+        mpv
         nix-index
         nix-search-cli
         nmap
@@ -201,9 +202,14 @@ in
         unzip
         uv
         valgrind
-        vesktop
+        (discord.override {
+          withOpenASAR = true;
+          withVencord = true;
+        })
         vlc
         wineWow64Packages.stable
+        xdg-utils
+        yt-dlp
         zip
         zed-editor
         zed-discord-presence
