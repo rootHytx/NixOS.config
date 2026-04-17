@@ -86,4 +86,19 @@
     identityFile = "~/.ssh/inesc/inesc";
     identitiesOnly = true;
   };
+  "opennebula" = {
+    host = "opennebula";
+    hostname = "10.61.14.5";
+    user = "root";
+  };
+  "opennebula-frontend" = {
+    host = "opennebula-frontend";
+    hostname = "10.61.14.31";
+    user = "root";
+  };
+  "upd" = {
+    host = "upd";
+    hostname = "10.50.9.10";
+    user = "sas";
+  };
 }

@@ -17,7 +17,6 @@
     };
     youtube-tui = {
       url = "github:Siriusmart/youtube-tui/6139b99714a0163d01767d926079ea8c97945ade";
-      # inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

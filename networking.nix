@@ -44,8 +44,9 @@
           {
             publicKey = "akaWAmsS5FzO8Xmjeru9q2n2ijgi0xpzPBKnVJFIVwY=";
             allowedIPs = [
-              "10.50.0.0/16"
               "10.11.2.144"
+              "10.50.0.0/16"
+              "10.59.0.0/24"
             ];
             endpoint = "pe01.inesctec.pt:443";
             persistentKeepalive = 25;

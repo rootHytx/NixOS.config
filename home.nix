@@ -1,4 +1,4 @@
-{ pkgs, default, ... }:
+{ pkgs, config, default, ... }:
 let
   cursorName = "capitaine-cursors";
   cursorPackage = pkgs.capitaine-cursors;
@@ -125,6 +125,7 @@ in
         fastfetch-custom = "fastfetch --config ~/.config/fastfetch/preset1.jsonc";
         minecraft = "nix-shell -p steam --run 'steam-run java -jar /home/hytx/Games/TLauncher/TLauncher.jar'";
         nfu = "ulimit -n 4096; prev=$(pwd) ; /etc/nixos ; _ nix flake update ; rebuild ; cd $prev";
+        pubkey = "cat /home/hytx/.ssh/id_ed25519.pub";
         python = "~/.venv/bin/python";
         rebuild = "sudo nixos-rebuild switch";
         typer = "typer --config ~/.config/typer/typer.yaml";
@@ -137,7 +138,7 @@ in
         plugins = [
           "git"
         ];
-        custom = "$HOME/.config/zsh/";
+        custom = "${config.home.homeDirectory}/.config/zsh/";
         theme = "darkblood-custom";
       };
 
